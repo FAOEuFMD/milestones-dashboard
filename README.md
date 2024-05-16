@@ -1,2 +1,2 @@
 # milestones-dashboard
-A milestone and outputs dashboard that tracks completion of the EuFMD Program Targets for the year 2024.
+An open-source dashboard that tracks the completion of yearly EuFMD Program Targets until the year 2027.
