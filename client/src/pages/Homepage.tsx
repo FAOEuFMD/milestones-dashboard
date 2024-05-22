@@ -1,9 +1,15 @@
-import React from "react";
+import React from 'react';
+import Navbar from '../pages/Navbar';
 
-export default function Homepage() {
-  return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
-  );
-}
+const Homepage: React.FC = () => {
+    return (
+        <div>
+            <Navbar />
+            <div className="container mx-auto mt-8">
+                <h1 className="text-3xl font-bold underline">Hello world!</h1>
+            </div>
+        </div>
+    );
+};
+
+export default Homepage;
