@@ -56,4 +56,4 @@ Run `npm run dev` in your terminal in the project folder. This will create the f
 
 ### Deployment
 
-The staging environment is deployed here on Render: https://eufmd-milestones-dashboard-staging.onrender.com
+The staging environment is deployed here on Render: https://milestones-dashboard-staging.onrender.com/
