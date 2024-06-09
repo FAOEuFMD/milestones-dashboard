@@ -1,16 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Homepage from './pages/Homepage';
-
+import React from "react";
+import "./App.css";
+import Homepage from "./pages/homepage/HomePage";
+import { Routes, Route } from "react-router-dom";
+import Focus123Dummy from "./pages/Focus123Dummy";
 
 const App: React.FC = () => {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Homepage />} />
-            </Routes>
-        </Router>
-    );
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/focus" element={<Focus123Dummy />} />
+      </Routes>
+    </div>
+  );
 };
 
 export default App;

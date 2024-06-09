@@ -1,0 +1,62 @@
+.strategy-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #81c784 0%, #388e3c 100%);
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding-top: 11rem;
+  padding-bottom: 5rem;
+}
+
+.circle-svg {
+  width: 45%;
+  height: auto;
+}
+
+.fill-white {
+  font-family: "Stick No Bills", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  fill: white;
+  font-weight: bold;
+}
+
+.fill-white-focus {
+  font-family: "Stick No Bills", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  fill: white;
+  font-weight: bold;
+}
+
+.stroke-white {
+  stroke: white;
+}
+
+.stroke-2 {
+  stroke-width: 0;
+}
+
+.text-anchor-middle {
+  text-anchor: middle;
+}
+
+.strategy-circle {
+  width: 100%;
+  height: auto;
+}
+
+.button {
+  fill: white;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, fill 0.3s ease-in-out;
+}
+
+.button:hover {
+  fill: #03251a;
+  font-size: 23px;
+}

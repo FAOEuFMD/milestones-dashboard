@@ -1,0 +1,30 @@
+footer {
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 2px solid #d4dcd7;
+}
+
+.logo-style {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact-info a,
+.additional-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.fao-1-logo {
+  border-right: 2px solid rgb(251, 249, 249);
+  margin-inline-end: 2rem;
+}
+
+.fao-2-logo {
+  margin-inline-end: 15rem;
+}
+
+.fao-3-logo {
+}
