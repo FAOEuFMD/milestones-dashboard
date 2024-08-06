@@ -12,6 +12,7 @@ const DummyFocus2: React.FC = () => {
           Dummy landing page2
         </p>
         <Plot
+          className="plot py-8 px-8"
           data={[
             {
               x: [1, 2, 3],
@@ -22,7 +23,15 @@ const DummyFocus2: React.FC = () => {
             },
             { type: "bar", x: [1, 2, 3], y: [2, 5, 3] },
           ]}
-          layout={{ width: 320, height: 240, title: "A Fancy Plot" }}
+          layout={{
+            width: 700,
+            height: 500,
+            title: "A Fancy Plot",
+            //This changes the color ih the graph background
+            plot_bgcolor: "#0000",
+            //This changes the color of the paper
+            paper_bgcolor: "#0000",
+          }}
         />
       </div>
     </div>
