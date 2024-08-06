@@ -5,3 +5,19 @@
 .env
 .DS_Store
 package-lock.json
+
+# Ignore all SQL dump files
+*.sql
+
+# Ignore specific directories
+dump-files/
+
+# Ignore log files
+*.log
+
+# Ignore build directories
+dist/
+build/
+
+# Optional eslint cache
+.eslintcache
