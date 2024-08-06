@@ -1,0 +1,36 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Node modules
+node_modules/
+
+# Environment variable files
+.env
+
+# Build directories
+/dist
+/build
+
+# Logs
+*.log
+
+# Database dump files
+*.sql
+*.sql.gz
+*.dump
+*.dump.gz
+
+# Backup files
+*.bak
+*.backup
+*.sql.bz2
+
+# Miscellaneous
+*.dat
+*.db
+
+# Local development configuration
+*.local.js
+
+# Ignore IDE configurations
+.vscode/
+.idea/
