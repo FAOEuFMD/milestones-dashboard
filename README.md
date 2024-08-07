@@ -31,7 +31,7 @@ Please make sure to keep these files out of version control to avoid potential i
 Run `npm install` in the project folder to install dependencies related to Express (the server). Check if the following dependencies are installed, otherwise install with the commands:
 
 - Express.js `npm install express`
-- Nodemon `nnpm install -g nodemon`
+- Nodemon `npm install -g nodemon`
 - MySQL `npm install mysql`
 
 Type `cd client` in the terminal and run `npm install` to install dependencies related to React TypeScript (the client). Check if the following is installed:
