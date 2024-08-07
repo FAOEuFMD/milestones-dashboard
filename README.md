@@ -13,7 +13,20 @@ An open-source dashboard that tracks the completion of yearly EuFMD Program Targ
 - Express.js (~4.16.1)
 - MySQL (^2.18.1)
 
-## Setup
+## Project setup
+
+Clone the repository.
+
+#### .gitignore Settings
+
+This project uses a `.gitignore` file to exclude certain files and directories from version control. Here’s a summary of what’s ignored:
+
+- **Environment Files:** `.env`, `.env.local`, `.env.production` – These files contain sensitive configuration and should not be committed to the repository.
+- **Build Artifacts:** `dist/`, `build/` – Generated build artifacts and temporary files are excluded to keep the repository clean.
+- **IDE Configurations:** `.vscode/`, `.idea/` – IDE-specific settings are ignored to avoid committing personal development environment configurations.
+- **Dump files:** `.sql/` – Ignores plain SQL dump files because they often contain large amounts of data and are not typically useful to track in version control.
+
+Please make sure to keep these files out of version control to avoid potential issues.
 
 ### Dependencies
 
@@ -31,23 +44,19 @@ Type `cd client` in the terminal and run `npm install` to install dependencies r
 
 ### Database Prep
 
-Create `.env` file in project directory and add
+Create a `.env` file in the root directory of the project and fill in the necessary environment variables. Use the `.env.example` file as a template:
 
-```
-  DB_HOST=localhost
-  DB_USER=root
-  DB_NAME=dashboard
-  DB_PASS=YOUR_PASSWORD
-  SUPER_SECRET=YOUR_PASSWORD
+```sh
+  cp .env.example .env
 ```
 
-(replace `YOUR_PASSWORD` with your actual password)
+Create a folder in your root named dump-files. Export a MySQL dump file from the production database and move it to your dump-files folder.
 
-Type `mysql -u root -p` in the terminal to access MySQL and type your password.
+Connect to MySQL and create a new local database called Targets `CREATE database Targets;`.
 
-In the MySQL terminaL, type `CREATE database dashboard;` to create a database in MySQL.
+Exit the MySQL client and run `mysql -u root -p Targets < path/to/your/dump/file` in the terminal to migrate the exported dump file into your local database.
 
-Run `npm run dev` in your terminal in the project folder. This will create the following the table `milestones`
+Check that the migration was successful and that the tables in your local database contain the exported data.
 
 ### Development
 
@@ -56,4 +65,6 @@ Run `npm run dev` in your terminal in the project folder. This will create the f
 
 ### Deployment
 
-The staging environment is deployed here on Render: https://milestones-dashboard-staging.onrender.com/
+The staging environment is hosted on Render, allowing for changes to be tested before they are deployed to production. The Render environment is connected to the production database on AWS, where necessary changes and updates can be made.
+
+Good luck!

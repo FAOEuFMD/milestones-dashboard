@@ -1,23 +1,36 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# Node modules
+node_modules/
+
+# Environment variable files
 .env
-.DS_Store
-package-lock.json
 
-# Ignore all SQL dump files
-*.sql
+# Build directories
+/dist
+/build
 
-# Ignore specific directories
-dump-files/
-
-# Ignore log files
+# Logs
 *.log
 
-# Ignore build directories
-dist/
-build/
+# Database dump files
+*.sql
+*.sql.gz
+*.dump
+*.dump.gz
 
-# Optional eslint cache
-.eslintcache
+# Backup files
+*.bak
+*.backup
+*.sql.bz2
+
+# Miscellaneous
+*.dat
+*.db
+
+# Local development configuration
+*.local.js
+
+# Ignore IDE configurations
+.vscode/
+.idea/
