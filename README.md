@@ -15,8 +15,6 @@ An open-source dashboard that tracks the completion of yearly EuFMD Program Targ
 
 ## Project setup
 
-Clone the repository.
-
 #### .gitignore Settings
 
 This project uses a `.gitignore` file to exclude certain files and directories from version control. Here’s a summary of what’s ignored:
