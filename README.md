@@ -58,11 +58,11 @@ Connect to MySQL and create a new local database.
 
 Exit the MySQL client and run `mysql -u root -p Targets < path/to/your/dump/file` in the terminal to migrate the exported dump file into your local database.
 
-Check that the migration was successful and that the tables in your local database contain the exported data.
+Ensure that the migration was successful by connecting to your newly created database and checking that the tables contain the exported data.
 
 ### Development
 
-- Run `npm start` in project directory to start the Express server on port 5000
+- Run `npm start` in the project directory to start the Express server on port 5000
 - Type `cd client` in a new terminal and run `npm run dev` to start the client server in development mode with hot reloading in port 5173.
 
 ### Deployment
