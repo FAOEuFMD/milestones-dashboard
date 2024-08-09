@@ -1,6 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-<<<<<<< HEAD
 # Node modules
 node_modules/
 
@@ -35,10 +34,3 @@ node_modules/
 # Ignore IDE configurations
 .vscode/
 .idea/
-=======
-# dependencies
-/node_modules
-.env
-.DS_Store
-package-lock.json
->>>>>>> main
