@@ -1,6 +1,5 @@
 require("dotenv").config();
 const mysql = require("mysql");
-
 module.exports = async function db(query) {
   const results = {
     data: [],
@@ -11,19 +10,16 @@ module.exports = async function db(query) {
     const DB_USER = process.env.DB_USER;
     const DB_PASS = process.env.DB_PASS;
     const DB_NAME = process.env.DB_NAME;
-
     const con = mysql.createConnection({
-      host: DB_HOST || "127.0.0.1",
-      user: DB_USER || "root",
+      host: DB_HOST,
+      user: DB_USER,
       password: DB_PASS,
-      database: DB_NAME || "database",
+      database: DB_NAME,
       multipleStatements: true
     });
-
     con.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
-
       con.query(query, function(err, result) {
         if (err) {
           results.error = err;
@@ -32,7 +28,6 @@ module.exports = async function db(query) {
           con.end();
           return;
         }
-
         if (!result.length) {
           if (result.affectedRows === 0) {
             results.error = "Action not complete";
@@ -41,7 +36,6 @@ module.exports = async function db(query) {
             con.end();
             return;
           }
-
           // push the result (which should be an OkPacket) to data
           // germinal - removed next line because it returns an array in an array when empty set
           // results.data.push(result);
@@ -53,12 +47,10 @@ module.exports = async function db(query) {
           // such as when the query ends with SELECT LAST_INSERT_ID() and returns an insertId)
           results.data.push(result[0]);
         }
-
         con.end();
         resolve(results);
       });
     });
   });
-
   return promise;
 };
