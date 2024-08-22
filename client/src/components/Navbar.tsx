@@ -1,26 +1,24 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import logo from "../assets/faologo.png";
+import logo from "../assets/EuFMD_2023_white_xl.png";
 
 const Navbar: React.FC = () => {
-  const navigate = useNavigate();
-  const takeToHome = () => navigate("/");
-
   return (
     <nav className="bg-green-600 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* logo */}
           <div className="flex items-center space-x-4">
-            <img
-              src={logo}
-              alt="FAO Logo"
-              className="h-40"
-              // these are the setting from the on render logo
-              //class="w-16 md:w-28 h-auto my-2 md:my-4"
-              onClick={takeToHome}
-            />
+            <Link to="/">
+              <img
+                src={logo}
+                alt="FAO Logo"
+                className="h-60"
+                // these are the setting from the on render logo
+                //class="w-16 md:w-28 h-auto my-2 md:my-4"
+              />
+            </Link>
           </div>
           {/* search bar
           <div className="flex-grow mx-4">
