@@ -6,20 +6,20 @@ const DB_USER = process.env.DB_USER;
 const DB_PASS = process.env.DB_PASS;
 const DB_NAME = process.env.DB_NAME;
 const con = mysql.createConnection({
-  host: DB_HOST,
-  user: DB_USER,
-  password: DB_PASS,
+  host: DB_HOST || "localhost",
+  user: DB_USER || "root",
+  password: DB_PASS || "",
   database: DB_NAME,
-  multipleStatements: true
+  multipleStatements: true,
 });
 con.connect(function (err) {
   if (err) {
-    console.error('Error connecting to the database:', err);
+    console.error("Error connecting to the database:", err);
     return;
   }
   console.log("Connected to the database!");
   // Example query to test the connection
-  con.query('SELECT * FROM Targets.target', function (err, results) {
+  con.query("SELECT * FROM Targets.target", function (err, results) {
     if (err) throw err;
     console.log(results);
   });
