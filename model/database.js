@@ -1,27 +1,23 @@
 require("dotenv").config();
 const mysql = require("mysql");
-const fs = require("fs");
-const DB_HOST = process.env.DB_HOST;
-const DB_USER = process.env.DB_USER;
-const DB_PASS = process.env.DB_PASS;
-const DB_NAME = process.env.DB_NAME;
-const con = mysql.createConnection({
-  host: DB_HOST || "localhost",
-  user: DB_USER || "root",
-  password: DB_PASS || "",
-  database: DB_NAME,
+
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   multipleStatements: true,
 });
-con.connect(function (err) {
+
+// Checks database connection
+pool.getConnection((err, connection) => {
   if (err) {
-    console.error("Error connecting to the database:", err);
+    console.error("Database connection failed:", err);
     return;
   }
-  console.log("Connected to the database!");
-  // Example query to test the connection
-  con.query("SELECT * FROM Targets.target", function (err, results) {
-    if (err) throw err;
-    console.log(results);
-  });
+  console.log("Database connected successfully!");
+  connection.release(); // Releases the connection back to the pool
 });
-module.exports = con;
+
+module.exports = pool;
