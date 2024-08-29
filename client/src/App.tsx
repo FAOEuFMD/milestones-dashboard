@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
 import Page404 from "./pages/Page404";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Keyarea";
 import Focus from "./pages/Focus";
 import DummyFocus2 from "./pages/DummyFocus2";
 
