@@ -1,7 +1,7 @@
 import React from "react";
 import Plot from "react-plotly.js";
 
-const DummyFocus2: React.FC = () => {
+const PlotGraph: React.FC = () => {
   return (
     <div>
       <div className="h-screen bg-gradient-to-br from-green-600 to-green-800">
@@ -38,4 +38,4 @@ const DummyFocus2: React.FC = () => {
   );
 };
 
-export default DummyFocus2;
+export default PlotGraph;
