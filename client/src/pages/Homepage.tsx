@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
-  const takeToFocus = () => navigate("/focus");
-  const takeToDummy = () => navigate("/dummy-focus");
+  const takeToKeyarea = () => navigate("/keyarea");
+
+  //We don't need the links to DummyFocus as we will be only navigating to KeyArea
+  // const takeToKeyarea = () => navigate("/dummy-focus");
 
   return (
     // background gradient
@@ -30,7 +32,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50% 50%, 100% 50%, 100% 240%)",
                 transform: "rotate(148deg)",
               }}
-              onClick={takeToDummy}
+              onClick={takeToKeyarea}
             ></div>
             <div
               id="focusTwoII"
@@ -39,7 +41,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50% 50%, 100% 50%, 100% 240%)",
                 transform: "rotate(208deg)",
               }}
-              onClick={takeToDummy}
+              onClick={takeToKeyarea}
             ></div>
             <div
               id="focusOneI"
@@ -48,7 +50,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50% 50%, 100% 50%, 100% 240%)",
                 transform: "rotate(269deg)",
               }}
-              onClick={takeToDummy}
+              onClick={takeToKeyarea}
             ></div>
             <div
               id="focusOneII"
@@ -57,7 +59,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50% 50%, 100% 50%, 100% 240%)",
                 transform: "rotate(330deg)",
               }}
-              onClick={takeToDummy}
+              onClick={takeToKeyarea}
             ></div>
             <div
               id="focusThreeIII"
@@ -66,7 +68,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50% 50%, 100% 50%, 180% 240%)",
                 transform: "rotate(30deg)",
               }}
-              onClick={takeToDummy}
+              onClick={takeToKeyarea}
             ></div>
             <div
               id="focusThreeII"
@@ -75,7 +77,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50% 50%, 100% 50%, 190% 240%)",
                 transform: "rotate(67deg)",
               }}
-              onClick={takeToDummy}
+              onClick={takeToKeyarea}
             ></div>
 
             <div
@@ -85,7 +87,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50% 50%, 100% 50%, 285% 240%)",
                 transform: "rotate(110deg)",
               }}
-              onClick={takeToDummy}
+              onClick={takeToKeyarea}
             ></div>
             {/*Creating smaller circle with three focus sections*/}
             <div className="container relative w-[250px] h-[250px] rounded-full bg-green-500 flex overflow-hidden items-center justify-center border-2 border-white">
@@ -96,7 +98,7 @@ const Homepage: React.FC = () => {
                   clipPath: "polygon(50% 50%, 100% 0, 100% 240%)",
                   transform: "rotate(74deg)",
                 }}
-                onClick={takeToFocus}
+                onClick={takeToKeyarea}
               ></div>
               <div
                 id="focusTwo"
@@ -105,7 +107,7 @@ const Homepage: React.FC = () => {
                   clipPath: "polygon(50% 50%, 100% 0, 100% 240%)",
                   transform: "rotate(194deg)",
                 }}
-                onClick={takeToFocus}
+                onClick={takeToKeyarea}
               ></div>
               <div
                 id="focusOne"
@@ -114,7 +116,7 @@ const Homepage: React.FC = () => {
                   clipPath: "polygon(50% 50%, 100% 0, 100% 240%)",
                   transform: "rotate(314deg)",
                 }}
-                onClick={takeToFocus}
+                onClick={takeToKeyarea}
               ></div>
             </div>
           </div>
