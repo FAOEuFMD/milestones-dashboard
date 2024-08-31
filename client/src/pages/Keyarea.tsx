@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
 interface KeyareaProps {
@@ -6,20 +7,24 @@ interface KeyareaProps {
 }
 
 const Keyarea: React.FC<KeyareaProps> = () => {
+  //We need the active area to keep the page working, however we're not using it
   const [activeArea, setActiveArea] = useState<string | null>(null);
 
-  const handleButtonClick = (area: string) => {
-    setActiveArea(area);
+  const navigate = useNavigate();
+
+  // const handleButtonClick = (area: string) => {
+  //   setActiveArea(area);
+  // };
+
+  const handleButtonClick = () => {
+    navigate("/keyarea/expectedresults");
   };
 
   return (
     <div className="flex flex-wrap">
       {/* Expected Results Button */}
       <div className="w-full md:w-1/3 p-4">
-        <Button
-          label="Expected Results"
-          onClick={() => handleButtonClick("expectedResults")}
-        />
+        <Button label="Expected Results" onClick={() => handleButtonClick()} />
         {activeArea === "expectedResults" && (
           <div className="bg-white border rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-semibold mb-2">
