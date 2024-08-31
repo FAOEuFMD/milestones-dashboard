@@ -5,6 +5,8 @@ import Homepage from "./pages/Homepage";
 import Page404 from "./pages/Page404";
 import Keyarea from "./pages/Keyarea"; // Updated import from Dashboard to Keyarea
 import ExpectedResults from "./pages/ExpectedResults";
+import PlotGraph from "./components/PlotGraph";
+//patch I will navigate to the PlotGraph
 
 const App: React.FC = () => {
   return (
@@ -18,7 +20,7 @@ const App: React.FC = () => {
             path="/keyarea/expectedresults"
             element={<ExpectedResults />}
           />
-          {/* <Route path="/dummy-focus" element={<DummyFocus2 />} /> */}
+          <Route path="/plot" element={<PlotGraph />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>

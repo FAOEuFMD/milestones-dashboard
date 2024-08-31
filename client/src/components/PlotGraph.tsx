@@ -6,11 +6,9 @@ const PlotGraph: React.FC = () => {
     <div>
       <div className="h-screen bg-gradient-to-br from-green-600 to-green-800">
         <h1 className="text-4xl font-bold text-center dark:text-white">
-          Secondary Focus Area
+          Imagine a table
         </h1>
-        <p className="text-2xl text-center dark:text-white">
-          Dummy landing page2
-        </p>
+
         <Plot
           className="plot py-8 px-8"
           data={[
