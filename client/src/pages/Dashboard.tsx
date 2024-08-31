@@ -11,24 +11,24 @@ const Dashboard: React.FC<DashboardProps> = () => {
       {/* activities */}
       <div className="w-full md:w-1/3 p-4">
         <div className="bg-white border rounded-lg p-6 shadow-sm">
-          <h2 className="text-xl font-semibold mb-2">Activities</h2>
-          <p className="text-gray-700">Content related to activities...</p>
+          <h2 className="text-xl font-semibold mb-2">Expected result </h2>
+          {/* <p className="text-gray-700">Content related to activities...</p> */}
         </div>
       </div>
 
       {/* indicators  */}
       <div className="w-full md:w-1/3 p-4">
         <div className="bg-white border rounded-lg p-6 shadow-sm">
-          <h2 className="text-xl font-semibold mb-2">Indicators</h2>
-          <p className="text-gray-700">Content related to indicators...</p>
+          <h2 className="text-xl font-semibold mb-2">Expected result</h2>
+          {/* <p className="text-gray-700">Content related to indicators...</p> */}
         </div>
       </div>
 
       {/* targets */}
       <div className="w-full md:w-1/3 p-4">
         <div className="bg-white border rounded-lg p-6 shadow-sm">
-          <h2 className="text-xl font-semibold mb-2">Targets</h2>
-          <p className="text-gray-700">Content related to targets...</p>
+          <h2 className="text-xl font-semibold mb-2">Expected result</h2>
+          {/* <p className="text-gray-700">Content related to targets...</p> */}
         </div>
       </div>
     </div>
