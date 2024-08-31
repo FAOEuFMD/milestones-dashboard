@@ -5,7 +5,7 @@ interface DashboardProps {
 }
 
 //dashboard component
-const Dashboard: React.FC<DashboardProps> = () => {
+const ExpectedResults: React.FC<DashboardProps> = () => {
   return (
     <div className="flex flex-wrap">
       {/* activities */}
@@ -35,4 +35,4 @@ const Dashboard: React.FC<DashboardProps> = () => {
   );
 };
 
-export default Dashboard;
+export default ExpectedResults;

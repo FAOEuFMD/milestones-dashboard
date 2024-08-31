@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
 import Page404 from "./pages/Page404";
 import Keyarea from "./pages/Keyarea"; // Updated import from Dashboard to Keyarea
+import ExpectedResults from "./pages/ExpectedResults";
 
 const App: React.FC = () => {
   return (
@@ -13,7 +14,10 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/keyarea" element={<Keyarea />} /> {/* Updated path */}
-          {/* <Route path="/focus" element={<Focus />} /> */}
+          <Route
+            path="/keyarea/expectedresults"
+            element={<ExpectedResults />}
+          />
           {/* <Route path="/dummy-focus" element={<DummyFocus2 />} /> */}
           <Route path="*" element={<Page404 />} />
         </Routes>
