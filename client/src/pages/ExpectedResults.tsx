@@ -1,19 +1,34 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+// import { useState } from "react";
 import Button from "../components/Button";
 // import PlotGraph from "../components/PlotGraph";
 
-interface DashboardProps {
+interface ExpectedResults {
   // Define any props here
 }
 
 //dashboard component
-const ExpectedResults: React.FC<DashboardProps> = () => {
+const ExpectedResults: React.FC<ExpectedResults> = () => {
   // const [activeArea, setActiveArea] = useState<string | null>(null);
   const navigate = useNavigate();
+
   const handleButtonClick = () => {
     navigate("/plot");
   };
+
+  //trying to shwo the component conditionally
+
+  // const [selectedExpectedResult, SetSelectedExpectedResult] = useState<
+  //   string | null
+  // >(null);
+
+  // const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   const selectedLabel = event.currentTarget.getAttribute("label");
+  //   SetSelectedExpectedResult(selectedLabel);
+  //   console.log(selectedLabel);
+  // };
+
   return (
     <div className="flex flex-wrap">
       {/* activities */}
