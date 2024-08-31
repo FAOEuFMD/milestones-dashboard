@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
 
-
 interface KeyareaProps {
   // Define any props here
 }
@@ -23,8 +22,14 @@ const Keyarea: React.FC<KeyareaProps> = () => {
         />
         {activeArea === "expectedResults" && (
           <div className="bg-white border rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-semibold mb-2">Expected Results</h2>
-            <p className="text-gray-700">Content related to expected results...</p>
+            <h2 className="text-xl font-semibold mb-2">
+              Key area 1 : Risk Monitoring{" "}
+            </h2>
+            <p className="text-gray-700">
+              {" "}
+              Ensure risk information are regularly collected, analyzed and
+              available for risk managers in Member Nations and other countries
+            </p>
           </div>
         )}
       </div>
@@ -37,22 +42,31 @@ const Keyarea: React.FC<KeyareaProps> = () => {
         />
         {activeArea === "indicators" && (
           <div className="bg-white border rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-semibold mb-2">Indicators</h2>
-            <p className="text-gray-700">Content related to indicators...</p>
+            <h2 className="text-xl font-semibold mb-2">
+              {" "}
+              Key Area 2 : Risk Mitigation
+            </h2>
+            <p className="text-gray-700">
+              Enhance prevention, confidence of freedom, laboratory biosafety to
+              increase protection against FAST diseases
+            </p>
           </div>
         )}
       </div>
 
       {/* Targets Button */}
       <div className="w-full md:w-1/3 p-4">
-        <Button
-          label="Targets"
-          onClick={() => handleButtonClick("targets")}
-        />
+        <Button label="Targets" onClick={() => handleButtonClick("targets")} />
         {activeArea === "targets" && (
           <div className="bg-white border rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-semibold mb-2">Targets</h2>
-            <p className="text-gray-700">Content related to targets...</p>
+            <h2 className="text-xl font-semibold mb-2">
+              Key Area 3 : Capacity Developement
+            </h2>
+            <p className="text-gray-700">
+              {" "}
+              Improve skills for effective and efficient response to FAST
+              incursion
+            </p>
           </div>
         )}
       </div>
