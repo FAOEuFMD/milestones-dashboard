@@ -8,7 +8,7 @@ interface KeyareaProps {
 
 const Keyarea: React.FC<KeyareaProps> = () => {
   //We need the active area to keep the page working, however we're not using it
-  const [activeArea, setActiveArea] = useState<string | null>(null);
+  // const [activeArea, setActiveArea] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const Keyarea: React.FC<KeyareaProps> = () => {
       {/* Expected Results Button */}
       <div className="w-full md:w-1/3 p-4">
         <Button label="Expected Results" onClick={() => handleButtonClick()} />
-        {activeArea === "expectedResults" && (
+        {
           <div className="bg-white border rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-semibold mb-2">
               Key area 1 : Risk Monitoring{" "}
@@ -36,16 +36,13 @@ const Keyarea: React.FC<KeyareaProps> = () => {
               available for risk managers in Member Nations and other countries
             </p>
           </div>
-        )}
+        }
       </div>
 
       {/* Indicators Button */}
       <div className="w-full md:w-1/3 p-4">
-        <Button
-          label="Indicators"
-          onClick={() => handleButtonClick("indicators")}
-        />
-        {activeArea === "indicators" && (
+        <Button label="Indicators" onClick={() => handleButtonClick()} />
+        {
           <div className="bg-white border rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-semibold mb-2">
               {" "}
@@ -56,13 +53,13 @@ const Keyarea: React.FC<KeyareaProps> = () => {
               increase protection against FAST diseases
             </p>
           </div>
-        )}
+        }
       </div>
 
       {/* Targets Button */}
       <div className="w-full md:w-1/3 p-4">
-        <Button label="Targets" onClick={() => handleButtonClick("targets")} />
-        {activeArea === "targets" && (
+        <Button label="Targets" onClick={() => handleButtonClick()} />
+        {
           <div className="bg-white border rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-semibold mb-2">
               Key Area 3 : Capacity Developement
@@ -73,7 +70,7 @@ const Keyarea: React.FC<KeyareaProps> = () => {
               incursion
             </p>
           </div>
-        )}
+        }
       </div>
     </div>
   );
