@@ -1,16 +1,14 @@
 import React from "react";
 import Plot from "react-plotly.js";
 
-const DummyFocus2: React.FC = () => {
+const PlotGraph: React.FC = () => {
   return (
     <div>
       <div className="h-screen bg-gradient-to-br from-green-600 to-green-800">
         <h1 className="text-4xl font-bold text-center dark:text-white">
-          Secondary Focus Area
+          Imagine a table
         </h1>
-        <p className="text-2xl text-center dark:text-white">
-          Dummy landing page2
-        </p>
+
         <Plot
           className="plot py-8 px-8"
           data={[
@@ -38,4 +36,4 @@ const DummyFocus2: React.FC = () => {
   );
 };
 
-export default DummyFocus2;
+export default PlotGraph;
