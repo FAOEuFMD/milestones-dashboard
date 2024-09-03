@@ -16,7 +16,9 @@ const Keyarea: React.FC<KeyareaProps> = () => {
   //   setActiveArea(area);
   // };
 
+  //
   const handleButtonClick = () => {
+    //this method would have to be update eventually to shwo a dynamic url
     navigate("/keyarea/expectedresults");
   };
 

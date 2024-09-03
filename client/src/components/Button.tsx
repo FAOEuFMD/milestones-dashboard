@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick?: (label?: string) => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
 }
@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type={type}
-      onClick={onClick}
+      onClick={() => onClick && onClick(label)}
       disabled={disabled}
       className={`w-full py-1 px-3 text-white font-medium rounded-md
         ${

@@ -20,7 +20,7 @@ const App: React.FC = () => {
             path="/keyarea/expectedresults"
             element={<ExpectedResults />}
           />
-          <Route path="/plot" element={<PlotGraph />} />
+          <Route path="/keyarea/expectedresults/plot" element={<PlotGraph />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>
