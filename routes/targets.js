@@ -38,11 +38,17 @@ router.get("/targets", async (req, res) => {
   }
 });
 
-
-
-
-
-
-
+router.get("/target", async (req, res) => {
+  try {
+    const result = await db.query(
+      "SELECT * FROM targets WHERE key_area_id = 1"
+    );
+    console.log("Query result:", result);
+    res.json(result);
+  } catch (error) {
+    console.error("Error retrieving targets", error);
+    res.status(500).json({ message: "Database query failed" });
+  }
+});
 
 module.exports = router;

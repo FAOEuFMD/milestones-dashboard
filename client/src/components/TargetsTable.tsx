@@ -17,7 +17,7 @@ const TargetsTable: React.FC = () => {
     const fetchData = async () => {
       try {
         console.log("Fetching data from /targets");
-        const response = await fetch("http://localhost:5000/api/targets");
+        const response = await fetch("http://localhost:5000/api/target");
         const result = await response.json();
         // Transform data as needed
         const transformedData = result.map((item: any) => ({
@@ -131,7 +131,7 @@ const TargetsTable: React.FC = () => {
                 className="py-2 px-4 border-b border-l border-r"
                 style={{ textAlign: "left" }}
               >
-                {row.indicator}
+                {row.indicator.includes("1.1.") && row.indicator}
               </td>
               <td
                 className="py-2 px-4 border-b border-l border-r"
