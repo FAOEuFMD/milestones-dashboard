@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../App.css";
 import logo from "../assets/EuFMD_2023_white_xl.png";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="bg-green-600 shadow-lg w-full">
+    <nav className="nav w-full">
       <div className="container mx-4">
         <div className="flex justify-between items-center">
           <Link to="/">
