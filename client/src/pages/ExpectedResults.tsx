@@ -28,29 +28,42 @@ const ExpectedResults: React.FC<ExpectedResults> = () => {
   // };
 
   return (
-    <div className="flex flex-wrap">
-      <div className="w-full md:w-1/3 p-4">
-        <Button
-          label="FAST global surveillance sustained and viral intelligence up-scaled"
-          onClick={handleButtonClick}
-        />
-      </div>
+    <div>
+      {/* Here the title should dsiplay Expected Results for Key area name example 
+       Expected results for Risk Monitring 
+       subtitle text :  Ensure risk information are regularly collected, analyzed and available for risk managers in Member Nations and other countries
+         */}
+      <h1 className="title pt-10">Expected Results for Risk Monitoring </h1>{" "}
+      <h3 className="title pt-10">
+        {" "}
+        Ensure risk information are regularly collected, analyzed and available
+        for risk managers in Member Nations and other countries{" "}
+      </h3>{" "}
+      <div className="flex flex-wrap">
+        <div className="w-full md:w-1/3 p-4">
+          {/* This button labels have to be taken from the params to better query de DB */}
+          <Button
+            label="1.1FAST global surveillance sustained and viral intelligence up-scaled"
+            onClick={handleButtonClick}
+          />
+        </div>
 
-      <div className="w-full md:w-1/3 p-4">
-        <Button
-          label="1.2 Enabled risk monitoring"
-          onClick={handleButtonClick}
-        />
-      </div>
+        <div className="w-full md:w-1/3 p-4">
+          <Button
+            label="1.2 Enabled risk monitoring"
+            onClick={handleButtonClick}
+          />
+        </div>
 
-      <div className="w-full md:w-1/3 p-4">
-        <Button
-          label="1.3 Enhanced FAST early warning"
-          onClick={handleButtonClick}
-        />
-      </div>
+        <div className="w-full md:w-1/3 p-4">
+          <Button
+            label="1.3 Enhanced FAST early warning"
+            onClick={handleButtonClick}
+          />
+        </div>
 
-      {showTable && <TargetsTable />}
+        {showTable && <TargetsTable />}
+      </div>
     </div>
   );
 };
