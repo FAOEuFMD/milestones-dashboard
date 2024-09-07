@@ -38,10 +38,34 @@ router.get("/targets", async (req, res) => {
   }
 });
 
-router.get("/target", async (req, res) => {
+router.get("/targets/KeyArea1/expectedresult/1-1", async (req, res) => {
   try {
     const result = await db.query(
-      "SELECT * FROM targets WHERE key_area_id = 1"
+      "SELECT * FROM targets WHERE key_area_id = 1 AND expected_result LIKE '1.1%';"
+    );
+    console.log("Query result:", result);
+    res.json(result);
+  } catch (error) {
+    console.error("Error retrieving targets", error);
+    res.status(500).json({ message: "Database query failed" });
+  }
+});
+router.get("/targets/KeyArea1/expectedresult/1-2", async (req, res) => {
+  try {
+    const result = await db.query(
+      "SELECT * FROM targets WHERE key_area_id = 1 AND expected_result LIKE '1.2%';"
+    );
+    console.log("Query result:", result);
+    res.json(result);
+  } catch (error) {
+    console.error("Error retrieving targets", error);
+    res.status(500).json({ message: "Database query failed" });
+  }
+});
+router.get("/targets/KeyArea1/expectedresult/1-3", async (req, res) => {
+  try {
+    const result = await db.query(
+      "SELECT * FROM targets WHERE key_area_id = 1 AND expected_result LIKE '1.3%';"
     );
     console.log("Query result:", result);
     res.json(result);
@@ -51,4 +75,29 @@ router.get("/target", async (req, res) => {
   }
 });
 
+// router.get(`/KeyArea1/expectedresult/${expected_result}`, async (req, res) => {
+//   try {
+//     const result = await db.query(
+//       `SELECT * FROM targets WHERE key_area_id = 1 AND expected_result LIKE '${expected_result}';`
+//     );
+//     console.log("Query result:", result);
+//     res.json(result);
+//   } catch (error) {
+//     console.error("Error retrieving targets", error);
+//     res.status(500).json({ message: "Database query failed" });
+//   }
+// });
+
+// router.get(`/KeyArea1/expectedresults/1.1/`, async (req, res) => {
+//   try {
+//     const result = await db.query(
+//       `SELECT * FROM targets WHERE key_area_id = 1 AND expected_result LIKE '1.1%'`
+//     );
+//     console.log("Query result:", result);
+//     res.json(result);
+//   } catch (error) {
+//     console.error("Error retrieving targets", error);
+//     res.status(500).json({ message: "Database query failed" });
+//   }
+// });
 module.exports = router;

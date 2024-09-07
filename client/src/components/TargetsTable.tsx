@@ -8,33 +8,36 @@ interface TableData {
   q3_2024: string;
   q4_2024: string;
   targetDate: string;
+  dbQ: string;
 }
 
-const TargetsTable: React.FC = () => {
+const TargetsTable: React.FC = ({ dbQ }) => {
   const [data, setData] = useState<TableData[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log("Fetching data from /targets");
-        const response = await fetch("http://localhost:5000/api/target");
-        const result = await response.json();
-        // Transform data as needed
-        const transformedData = result.map((item: any) => ({
-          indicator: item.indicator,
-          annualProgramTarget: item.annual_target,
-          q1_2024: item.Q1 || "",
-          q2_2024: item.Q2 || "",
-          q3_2024: item.Q3 || "",
-          q4_2024: item.Q4 || "",
-          targetDate: item["Target Date"] || "",
-        }));
-        setData(transformedData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      console.log(`Fetching data from /targets/KeyArea1/expectedresult/${dbQ}`);
+      const response = await fetch(
+        `http://localhost:5000/api/targets/KeyArea1/expectedresult/${dbQ}`
+      );
+      const result = await response.json();
+      // Transform data as needed
+      const transformedData = result.map((item: any) => ({
+        indicator: item.indicator,
+        annualProgramTarget: item.annual_target,
+        q1_2024: item.Q1 || "",
+        q2_2024: item.Q2 || "",
+        q3_2024: item.Q3 || "",
+        q4_2024: item.Q4 || "",
+        targetDate: item["Target Date"] || "",
+      }));
+      setData(transformedData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -131,7 +134,7 @@ const TargetsTable: React.FC = () => {
                 className="py-2 px-4 border-b border-l border-r"
                 style={{ textAlign: "left" }}
               >
-                {row.indicator.includes("1.1.") && row.indicator}
+                {row.indicator}
               </td>
               <td
                 className="py-2 px-4 border-b border-l border-r"
