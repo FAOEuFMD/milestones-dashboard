@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
         ${
           disabled
             ? "bg-gray-400 cursor-not-allowed"
-            : "focus-one hover:bg-teal-800"
+            : "bg-green-500 hover:bg-green-600"
         }
         focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 text-sm`}
     >
