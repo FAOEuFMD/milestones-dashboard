@@ -39,7 +39,7 @@ const TargetsTable: React.FC = ({ dbQ }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [data]);
 
   return (
     <div className="container mx-auto p-4" style={{ maxWidth: "1300px" }}>
