@@ -13,42 +13,38 @@ const Keyarea: React.FC<KeyareaProps> = () => {
 
   const navigate = useNavigate();
 
-  // const handleButtonClick = (area: string) => {
-  //   setActiveArea(area);
-  // };
-
-  const handleButtonClick = () => {
-    navigate("/keyarea/expectedresults");
+  const handleButtonClick = (name: string) => {
+    navigate(`/keyarea/${name.toLowerCase().replace(/\s+/g, "")}`);
   };
 
   return (
     <div>
-      {/* Here the title should dsiplay the Ke Area Selected for example Risk Monitoring
-      
-      Hover on Key areas to show key area and navigate them to that Key areas */}
-      <h1 className="title pt-10">Key Areas of Risk Monitoring</h1>{" "}
+      <h1 className="title pt-10">Key Areas of Risk Monitoring</h1>
       <div className="flex flex-wrap">
         {/* Expected Results Button */}
         <div className="w-full md:w-1/3 p-4">
           <Button
-            label="[RISK MONITORING] Ensure risk information are regularly collected, analyzed and available for risk managers in Member Nations and other countries"
-            onClick={() => handleButtonClick()}
+            name="RISK MONITORING"
+            label="Ensure risk information are regularly collected, analyzed and available for risk managers in Member Nations and other countries"
+            onClick={() => handleButtonClick("RISK MONITORING")}
           />
         </div>
 
         {/* Indicators Button */}
         <div className="w-full md:w-1/3 p-4">
           <Button
-            label="[RISK MITIGATION] Enhance prevention, confidence of freedom, laboratory biosafety to increase protection against FAST diseases"
-            onClick={() => handleButtonClick()}
+            name="RISK MITIGATION"
+            label="Enhance prevention, confidence of freedom, laboratory biosafety to increase protection against FAST diseases"
+            onClick={() => handleButtonClick("RISK MITIGATION")}
           />
         </div>
 
         {/* Targets Button */}
         <div className="w-full md:w-1/3 p-4">
           <Button
-            label=" [CAPACITY DEVELOPMENT] Improve skills for effective and efficient response to FAST incursion"
-            onClick={() => handleButtonClick()}
+            name="CAPACITY DEVELOPMENT"
+            label="Improve skills for effective and efficient response to FAST incursion"
+            onClick={() => handleButtonClick("CAPACITY DEVELOPMENT")}
           />
         </div>
       </div>
