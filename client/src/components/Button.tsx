@@ -2,13 +2,15 @@ import React from "react";
 
 interface ButtonProps {
   label: string;
-  onClick: () => void;
+  name: string;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
   label,
+  name,
   onClick,
   type = "button",
   disabled = false,
@@ -18,7 +20,9 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      name={name}
       className={`w-full py-1 px-3 text-white font-medium rounded-md
+       
         ${
           disabled
             ? "bg-gray-400 cursor-not-allowed"
