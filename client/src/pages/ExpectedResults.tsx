@@ -18,7 +18,7 @@ const ExpectedResults: React.FC<ExpectedResults> = () => {
     setShowTable(true); // Update state to show the TargetsTable component
     setSelectedName(event.target.name);
     // setName(selectedName);
-    console.log(typeof selectedName);
+    console.log(selectedName);
   };
   //trying to shwo the component conditionally
 
@@ -69,7 +69,7 @@ const ExpectedResults: React.FC<ExpectedResults> = () => {
             onClick={handleButtonClick}
           />
         </div>
-
+        {/* Here you pass the selectedName from the button to the targets table */}
         {showTable && <TargetsTable dbQ={selectedName} />}
       </div>
     </div>
