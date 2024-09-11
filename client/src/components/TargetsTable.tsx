@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 interface TableData {
+  key_area_id: string;
   indicator: string;
-  annualProgramTarget: string;
+  annual_target: string;
   q1_2024: string;
   q2_2024: string;
   q3_2024: string;
@@ -23,8 +24,9 @@ const TargetsTable: React.FC = ({ dbQ }) => {
       const result = await response.json();
       // Transform data as needed
       const transformedData = result.map((item: any) => ({
+        key_area_id: item.key_area_id,
         indicator: item.indicator,
-        annualProgramTarget: item.annual_target,
+        annual_target: item.annual_target,
         q1_2024: item.Q1 || "",
         q2_2024: item.Q2 || "",
         q3_2024: item.Q3 || "",

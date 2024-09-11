@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
 import Page404 from "./pages/Page404";
-import Keyarea from "./pages/Keyarea"; // Updated import from Dashboard to Keyarea
+import FocusObjectives from "./pages/FocusObjectives"; // Updated import from Dashboard to Keyarea
 import ExpectedResults from "./pages/ExpectedResults";
 import PlotGraph from "./components/PlotGraph";
 //patch I will navigate to the PlotGraph
@@ -15,7 +15,8 @@ const App: React.FC = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/keyarea" element={<Keyarea />} /> {/* Updated path */}
+          <Route path="/keyarea" element={<FocusObjectives />} />{" "}
+          {/* Updated path */}
           <Route
             path="/keyarea/expectedresults"
             element={<ExpectedResults />}
