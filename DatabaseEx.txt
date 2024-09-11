@@ -105,13 +105,13 @@ and if we have targets renamed as target
         "focus_objective_name": " Improved PROTECTION of LIVESTOCK sector in EuFMD Member Nations from FAST introduction and spread",
         "key_area_id": 2,
         "key_area_name": "[RISK MITIGATION]"
-        "key_area_desc": "Enhance prevention, confidence of freedom, laboratory biosafety to increase protection against FAST diseases",
+       * "key_area_desc": "Enhance prevention, confidence of freedom, laboratory biosafety to increase protection against FAST diseases",
         "target_id": 19,
-        "target_indicator_id":a
-        "target_indicator_description":" Number FAST and biosecurity awareness material produced and provided to farmers/private vets/industry \n\n",
-        "target_description": "i) 8 Innovative communication and awareness material developed (video, social media comms campaign): 4 for FMD and 4 for priority FAST, 3 for biosecurity (LR, SR, Pig farms)\n(Amplified Disease Awareness:\nImpact Target: Develop and disseminate 8 innovative communication materials (videos and social media campaigns), generating a 30% increase in views, downloads, and shares. This will elevate public awareness about FMD and priority FAST diseases, as well as enhance understanding of biosecurity measures on Livestock Farms (LR, SR) and Pig Farms.\nMeans of Verification: Track metrics such as views, downloads, shares, and comments on various platforms.)\n",
-        "target_expected_result_num": 2 
-        "target_expected_result_desc""Improved livestock biosecurity in MNs",
+       * "target_indicator_id":a
+       * "target_indicator_description":" Number FAST and biosecurity awareness material produced and provided to farmers/private vets/industry \n\n",
+       * "target_description": "i) 8 Innovative communication and awareness material developed (video, social media comms campaign): 4 for FMD and 4 for priority FAST, 3 for biosecurity (LR, SR, Pig farms)\n(Amplified Disease Awareness:\nImpact Target: Develop and disseminate 8 innovative communication materials (videos and social media campaigns), generating a 30% increase in views, downloads, and shares. This will elevate public awareness about FMD and priority FAST diseases, as well as enhance understanding of biosecurity measures on Livestock Farms (LR, SR) and Pig Farms.\nMeans of Verification: Track metrics such as views, downloads, shares, and comments on various platforms.)\n",
+       * "target_expected_result_num": 2 
+       * "target_expected_result_desc""Improved livestock biosecurity in MNs",
         "annual_target": 8,
         "program_target": null,
         "Q1/2024": 0,
