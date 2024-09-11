@@ -1,9 +1,9 @@
 
-Question number 1 - URL names 
+* Question number 1 - URL names *
 
 Option 1 : reusing the numbers 
 
-/Focus-objective1/KeyArea1/expected-result/1
+/Focus-objective1/KeyArea1/expected-result1/a
 
 Option 2 : Semantinc Url for imporved accesibility 
 
@@ -15,17 +15,13 @@ Database needs:
 
 Change table names for columns : 
 
-Option 1 
 
-targets table
-id should be target_id
-
-Or rename to = target
+ rename to = target
 so that we can grab target.id 
 
 indicator would a letter 
 
-and target_description can be just description
+target_description can be just description and remove the "i)"
 
 * Restructuring the Json elements *
 
@@ -101,6 +97,8 @@ This is the object we receive
         "Q4/2024": null
     },
 
+We need to divide the expected_result in 2 to include expected_result_number
+and if we have targets renamed as target 
     The IDEAL Object would be or rename the table targets to target 
 
      "focus_objective_id": 1,
