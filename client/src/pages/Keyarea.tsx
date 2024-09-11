@@ -1,6 +1,7 @@
 // import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import "../App.css";
 
 interface KeyareaProps {
   // Define any props here
@@ -12,65 +13,42 @@ const Keyarea: React.FC<KeyareaProps> = () => {
 
   const navigate = useNavigate();
 
-  // const handleButtonClick = (area: string) => {
-  //   setActiveArea(area);
-  // };
-
-  const handleButtonClick = () => {
+  const handleButtonClick = (name: string) => {
+    //this is what we need to do
+    // navigate(`/keyarea/${name.toLowerCase().replace(/\s+/g, "")}`);
     navigate("/keyarea/expectedresults");
   };
 
   return (
-    <div className="flex flex-wrap">
-      {/* Expected Results Button */}
-      <div className="w-full md:w-1/3 p-4">
-        <Button label="Expected Results" onClick={() => handleButtonClick()} />
-        {
-          <div className="bg-white border rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-semibold mb-2">
-              Key area 1 : Risk Monitoring{" "}
-            </h2>
-            <p className="text-gray-700">
-              {" "}
-              Ensure risk information are regularly collected, analyzed and
-              available for risk managers in Member Nations and other countries
-            </p>
-          </div>
-        }
-      </div>
+    <div>
+      <h1 className="title pt-10">Key Areas of Risk Monitoring</h1>
+      <div className="flex flex-wrap">
+        {/* Expected Results Button */}
+        <div className="w-full md:w-1/3 p-4">
+          <Button
+            name="RISK MONITORING"
+            label="Ensure risk information are regularly collected, analyzed and available for risk managers in Member Nations and other countries"
+            onClick={() => handleButtonClick("RISK MONITORING")}
+          />
+        </div>
 
-      {/* Indicators Button */}
-      <div className="w-full md:w-1/3 p-4">
-        <Button label="Indicators" onClick={() => handleButtonClick()} />
-        {
-          <div className="bg-white border rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-semibold mb-2">
-              {" "}
-              Key Area 2 : Risk Mitigation
-            </h2>
-            <p className="text-gray-700">
-              Enhance prevention, confidence of freedom, laboratory biosafety to
-              increase protection against FAST diseases
-            </p>
-          </div>
-        }
-      </div>
+        {/* Indicators Button */}
+        <div className="w-full md:w-1/3 p-4">
+          <Button
+            name="RISK MITIGATION"
+            label="Enhance prevention, confidence of freedom, laboratory biosafety to increase protection against FAST diseases"
+            onClick={() => handleButtonClick("RISK MITIGATION")}
+          />
+        </div>
 
-      {/* Targets Button */}
-      <div className="w-full md:w-1/3 p-4">
-        <Button label="Targets" onClick={() => handleButtonClick()} />
-        {
-          <div className="bg-white border rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-semibold mb-2">
-              Key Area 3 : Capacity Developement
-            </h2>
-            <p className="text-gray-700">
-              {" "}
-              Improve skills for effective and efficient response to FAST
-              incursion
-            </p>
-          </div>
-        }
+        {/* Targets Button */}
+        <div className="w-full md:w-1/3 p-4">
+          <Button
+            name="CAPACITY DEVELOPMENT"
+            label="Improve skills for effective and efficient response to FAST incursion"
+            onClick={() => handleButtonClick("CAPACITY DEVELOPMENT")}
+          />
+        </div>
       </div>
     </div>
   );

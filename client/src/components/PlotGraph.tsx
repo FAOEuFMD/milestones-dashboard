@@ -4,8 +4,8 @@ import Plot from "react-plotly.js";
 const PlotGraph: React.FC = () => {
   return (
     <div>
-      <div className="h-screen bg-gradient-to-br from-green-600 to-green-800">
-        <h1 className="text-4xl font-bold text-center dark:text-white">
+      <div className="h-screen">
+        <h1 className="text-4xl font-bold text-center dark:text-teal-800 pt-10">
           Imagine a table
         </h1>
 
@@ -17,9 +17,12 @@ const PlotGraph: React.FC = () => {
               y: [2, 6, 3],
               type: "scatter",
               mode: "lines+markers",
-              marker: { color: "red" },
+              marker: { color: "#048B5D" },
+              line: {color: "#2B9866"}
             },
-            { type: "bar", x: [1, 2, 3], y: [2, 5, 3] },
+            { type: "bar", x: [1, 2, 3], y: [2, 5, 3],
+              marker: {color: "#018877"}
+             },
           ]}
           layout={{
             width: 700,
