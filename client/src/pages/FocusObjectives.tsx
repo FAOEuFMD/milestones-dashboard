@@ -16,7 +16,7 @@ const Keyarea: React.FC<KeyareaProps> = () => {
   const handleButtonClick = (name: string) => {
     //This is the dynamic choosing of the url for the DBq uery
     // navigate(`/keyarea/${name.toLowerCase().replace(/\s+/g, "")}`); => Irene put this in your CV
-    navigate("/keyarea/expectedresults");
+    navigate("/Keyareas/expectedresults");
   };
 
   return (

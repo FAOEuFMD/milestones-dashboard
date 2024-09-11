@@ -15,7 +15,17 @@ Database needs:
 
 Change table names for columns : 
 
+* focus_objective table *
 
+divide focus_objective_name into 2 
+
+focus_objective_name
+and 
+focus_objective_subtitle that we will use to show the full text 
+
+ex see the PERFECT OBJECT bellow 
+
+* targets table *
  rename to = target
 so that we can grab target.id 
 
@@ -81,7 +91,8 @@ This is the object we receive
 
  {
         "focus_objective_id": 1,
-        "focus_objective_name": " Improved PROTECTION of LIVESTOCK sector in EuFMD Member Nations from FAST introduction and spread",
+        "focus_objective_name": "PROTECTION of LIVESTOCK",
+        "focus_objective_subtitle": " Improved protection of livestock sector in EuFMD Member Nations from FAST introduction and spread",
         "key_area_id": 2,
         "key_area_name": "[RISK MITIGATION] Enhance prevention, confidence of freedom, laboratory biosafety to increase protection against FAST diseases",
         "target_id": 19,
@@ -102,7 +113,9 @@ and if we have targets renamed as target
     The IDEAL Object would be or rename the table targets to target 
 
      "focus_objective_id": 1,
-        "focus_objective_name": " Improved PROTECTION of LIVESTOCK sector in EuFMD Member Nations from FAST introduction and spread",
+       * "focus_objective_name": " Improved PROTECTION of LIVESTOCK sector in EuFMD Member Nations from FAST introduction and spread",
+       * "focus_objective_subtitle": " Improved PROTECTION of LIVESTOCK sector in EuFMD Member Nations from FAST introduction and spread",
+        "key_area_id": 2,
         "key_area_id": 2,
         "key_area_name": "[RISK MITIGATION]"
        * "key_area_desc": "Enhance prevention, confidence of freedom, laboratory biosafety to increase protection against FAST diseases",

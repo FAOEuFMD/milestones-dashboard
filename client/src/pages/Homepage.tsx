@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
   //navigate to Key area numer
-  const takeToKeyarea = () => navigate("/keyarea");
+  const takeToKeyarea = () => navigate("/Keyareas");
 
   //We don't need the links to DummyFocus as we will be only navigating to KeyArea
   // const takeToKeyarea = () => navigate("/dummy-focus");

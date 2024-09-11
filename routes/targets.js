@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../model/helper");
 
+// this query selects all the necessary information from the Database
+//it's in a const since the translation from express to mysql is difficult
 const query = `SELECT
 fo.id AS focus_objective_id,
 fo.name AS focus_objective_name,
@@ -34,8 +36,10 @@ router.get("/health-check", (req, res) => {
 
 router.get("/alltargets", async (req, res) => {
   try {
+    //here we use the query and it works :D
     const result = await db.query(query);
     res.json(result);
+    console.log("You're amazing babes");
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching targets" });
@@ -53,6 +57,8 @@ router.get("/targets", async (req, res) => {
   }
 });
 
+//this routes selects key are 1 and expected result 1.1 should be deprecated soon
+
 router.get("/targets/KeyArea1/expectedresult/1-1", async (req, res) => {
   try {
     const result = await db.query(
@@ -65,6 +71,8 @@ router.get("/targets/KeyArea1/expectedresult/1-1", async (req, res) => {
     res.status(500).json({ message: "Database query failed" });
   }
 });
+
+//this routes selects key are 1 and expected result 1.2 should be deprecated soon
 router.get("/targets/KeyArea1/expectedresult/1-2", async (req, res) => {
   try {
     const result = await db.query(
@@ -77,6 +85,8 @@ router.get("/targets/KeyArea1/expectedresult/1-2", async (req, res) => {
     res.status(500).json({ message: "Database query failed" });
   }
 });
+
+//this routes selects key are 1 and expected result 1.1 should be deprecated soon
 router.get("/targets/KeyArea1/expectedresult/1-3", async (req, res) => {
   try {
     const result = await db.query(

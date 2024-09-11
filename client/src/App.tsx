@@ -15,10 +15,10 @@ const App: React.FC = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/keyarea" element={<FocusObjectives />} />{" "}
+          <Route path="/KeyAreas" element={<FocusObjectives />} />{" "}
           {/* Updated path */}
           <Route
-            path="/keyarea/expectedresults"
+            path="/KeyAreas/expectedresults"
             element={<ExpectedResults />}
           />
           <Route path="/plot" element={<PlotGraph />} />
