@@ -13,8 +13,13 @@ const Keyarea: React.FC<KeyareaProps> = () => {
 
   const navigate = useNavigate();
 
-  const handleButtonClick = (name: string) => {
-    navigate(`/keyarea/${name.toLowerCase().replace(/\s+/g, "")}`);
+  const handleButtonClick = () => {
+    // deleted the name param because everything was hardcoded we should use Irene's dynamic choosing once the DB data is correct
+
+    //This is the dynamic choosing of the url for the DBq uery
+    // navigate(`/keyarea/${name.toLowerCase().replace(/\s+/g, "")}`); => Irene put this in your CV
+
+    navigate("/Keyareas/expectedresults");
   };
 
   return (
@@ -26,7 +31,7 @@ const Keyarea: React.FC<KeyareaProps> = () => {
           <Button
             name="RISK MONITORING"
             label="Ensure risk information are regularly collected, analyzed and available for risk managers in Member Nations and other countries"
-            onClick={() => handleButtonClick("RISK MONITORING")}
+            onClick={() => handleButtonClick()}
           />
         </div>
 
@@ -35,7 +40,7 @@ const Keyarea: React.FC<KeyareaProps> = () => {
           <Button
             name="RISK MITIGATION"
             label="Enhance prevention, confidence of freedom, laboratory biosafety to increase protection against FAST diseases"
-            onClick={() => handleButtonClick("RISK MITIGATION")}
+            onClick={() => handleButtonClick()}
           />
         </div>
 
@@ -44,7 +49,7 @@ const Keyarea: React.FC<KeyareaProps> = () => {
           <Button
             name="CAPACITY DEVELOPMENT"
             label="Improve skills for effective and efficient response to FAST incursion"
-            onClick={() => handleButtonClick("CAPACITY DEVELOPMENT")}
+            onClick={() => handleButtonClick()}
           />
         </div>
       </div>

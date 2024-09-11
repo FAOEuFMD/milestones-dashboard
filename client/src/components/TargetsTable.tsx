@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 
 interface TableData {
+  key_area_id: string;
   indicator: string;
-  annualProgramTarget: string;
+  annual_target: string;
   q1_2024: string;
   q2_2024: string;
   q3_2024: string;
   q4_2024: string;
   targetDate: string;
-  dbQ: string;
+  dbQ: string; //This is a abreviattion of dbQ which we pass as a prop in ExpectedResults to Targets table aka selectedName
 }
 
+//here we pass the dbQ so that Targets table so that the table makes the call with the name from the button
 const TargetsTable: React.FC = ({ dbQ }) => {
   const [data, setData] = useState<TableData[]>([]);
 
@@ -23,8 +25,10 @@ const TargetsTable: React.FC = ({ dbQ }) => {
       const result = await response.json();
       // Transform data as needed
       const transformedData = result.map((item: any) => ({
+        // Typescript does not take type any -- Sophie help
+        key_area_id: item.key_area_id,
         indicator: item.indicator,
-        annualProgramTarget: item.annual_target,
+        annual_target: item.annual_target,
         q1_2024: item.Q1 || "",
         q2_2024: item.Q2 || "",
         q3_2024: item.Q3 || "",
@@ -39,7 +43,7 @@ const TargetsTable: React.FC = ({ dbQ }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [data]);
 
   return (
     <div className="container mx-auto p-4" style={{ maxWidth: "1300px" }}>

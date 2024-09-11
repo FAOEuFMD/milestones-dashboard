@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonProps {
   label: string;
-  name: string;
+  name: string; // added name tag to be able to make the call in DB should be deprecated when we can retrieve all data from Database and store it locally
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
@@ -10,7 +10,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({
   label,
-  name,
+  name, //ibidem
   onClick,
   type = "button",
   disabled = false,
