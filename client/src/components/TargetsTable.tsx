@@ -9,9 +9,10 @@ interface TableData {
   q3_2024: string;
   q4_2024: string;
   targetDate: string;
-  dbQ: string;
+  dbQ: string; //This is a abreviattion of dbQ which we pass as a prop in ExpectedResults to Targets table aka selectedName
 }
 
+//here we pass the dbQ so that Targets table so that the table makes the call with the name from the button
 const TargetsTable: React.FC = ({ dbQ }) => {
   const [data, setData] = useState<TableData[]>([]);
 
@@ -24,6 +25,7 @@ const TargetsTable: React.FC = ({ dbQ }) => {
       const result = await response.json();
       // Transform data as needed
       const transformedData = result.map((item: any) => ({
+        // Typescript does not take type any -- Sophie help
         key_area_id: item.key_area_id,
         indicator: item.indicator,
         annual_target: item.annual_target,

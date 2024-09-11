@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react"; //deleted Useeffect
 import { useState } from "react";
 import Button from "../components/Button";
 import TargetsTable from "../components/TargetsTable";
@@ -11,13 +11,14 @@ interface ExpectedResults {
 //dashboard component
 const ExpectedResults: React.FC<ExpectedResults> = () => {
   const [showTable, setShowTable] = useState(false); // State to control table visibility
-  const [name, setName] = useState<string | null>(null); // State to control table visibility
+  // const [name, setName] = useState<string | null>(null); // State to control table visibility
   const [selectedName, setSelectedName] = useState<string | null>(null);
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setShowTable(true); // Update state to show the TargetsTable component
-    setSelectedName(event.target.name);
-    // setName(selectedName);
+    // sets selectedName as the name property from Button
+    setSelectedName(event.target.name); // name does exist in the Buttom component just not in before the website is rendered - Sophie Help :')
+
     console.log(selectedName);
   };
   //trying to shwo the component conditionally
@@ -49,7 +50,7 @@ const ExpectedResults: React.FC<ExpectedResults> = () => {
           {/* This button labels have to be taken from the params to better query de DB */}
           <Button
             label="1.1FAST global surveillance sustained and viral intelligence up-scaled"
-            name="1-1"
+            name="1-1" // here every button has the name tag corresponding the the expected results 1.1 since it's not possible to call 1.1 on the routes
             onClick={handleButtonClick}
           />
         </div>
@@ -69,7 +70,7 @@ const ExpectedResults: React.FC<ExpectedResults> = () => {
             onClick={handleButtonClick}
           />
         </div>
-        {/* Here you pass the selectedName from the button to the targets table */}
+        {/* Here you pass the selectedName from the button property name to the compenent TargetsTable */}
         {showTable && <TargetsTable dbQ={selectedName} />}
       </div>
     </div>

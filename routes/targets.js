@@ -58,7 +58,7 @@ router.get("/targets", async (req, res) => {
 });
 
 //this routes selects key are 1 and expected result 1.1 should be deprecated soon
-
+// it corresponds to the name tag in Button component as 1.1 is not valid express
 router.get("/targets/KeyArea1/expectedresult/1-1", async (req, res) => {
   try {
     const result = await db.query(
