@@ -16,8 +16,9 @@ const ExpectedResults: React.FC<ExpectedResults> = () => {
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setShowTable(true); // Update state to show the TargetsTable component
-    // sets selectedName as the name property from Button
-    setSelectedName(event.target.name); // name does exist in the Buttom component just not in before the website is rendered - Sophie Help :')
+    // sets selectedName as the name property from Button. We have to define that event.target was the button element so typscript knew it had a name:
+    const target = event.target as HTMLButtonElement;
+    setSelectedName(target.name);
 
     console.log(selectedName);
   };
@@ -70,8 +71,8 @@ const ExpectedResults: React.FC<ExpectedResults> = () => {
             onClick={handleButtonClick}
           />
         </div>
-        {/* Here you pass the selectedName from the button property name to the compenent TargetsTable */}
-        {showTable && <TargetsTable dbQ={selectedName} />}
+        {/* Here you ensure that selectedName has been updated and then pass the selectedName from the button property name to the compenent TargetsTable */}
+        {showTable && selectedName && <TargetsTable dbQ={selectedName} />}
       </div>
     </div>
   );

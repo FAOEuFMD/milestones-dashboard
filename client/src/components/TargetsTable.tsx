@@ -9,11 +9,13 @@ interface TableData {
   q3_2024: string;
   q4_2024: string;
   targetDate: string;
-  dbQ: string; //This is a abreviattion of dbQ which we pass as a prop in ExpectedResults to Targets table aka selectedName
 }
 
-//here we pass the dbQ so that Targets table so that the table makes the call with the name from the button
-const TargetsTable: React.FC = ({ dbQ }) => {
+interface TargetsTableProps {
+  dbQ: string; // Add dbQ to the props interface so we have defined it as a prop
+}
+//here we pass the dbQ so that Targets table so that the table makes the call with the name from the button. we have to specify the props in the <> after React.FC
+const TargetsTable: React.FC<TargetsTableProps> = ({ dbQ }) => {
   const [data, setData] = useState<TableData[]>([]);
 
   const fetchData = async () => {
@@ -25,7 +27,6 @@ const TargetsTable: React.FC = ({ dbQ }) => {
       const result = await response.json();
       // Transform data as needed
       const transformedData = result.map((item: any) => ({
-        // Typescript does not take type any -- Sophie help
         key_area_id: item.key_area_id,
         indicator: item.indicator,
         annual_target: item.annual_target,
@@ -144,7 +145,7 @@ const TargetsTable: React.FC = ({ dbQ }) => {
                 className="py-2 px-4 border-b border-l border-r"
                 style={{ textAlign: "left" }}
               >
-                {row.annualProgramTarget}
+                {row.annual_target}
               </td>
               <td className="py-2 px-4 border-b border-l border-r">
                 {row.q1_2024}

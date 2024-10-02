@@ -61,13 +61,31 @@ const Homepage: React.FC = () => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <text
-          x="34%"
+          x="33%"
+          y="63%"
+          dominant-baseline="middle"
+          text-anchor="middle"
+          className="text-xl fill-white"
+        >
+          Key area 1 : 
+        </text>
+        <text
+          x="33%"
           y="67%"
           dominant-baseline="middle"
           text-anchor="middle"
           className="text-xl fill-white"
         >
-          Key area 1 : Risk Monitoring
+         Risk Monitoring
+        </text>
+        <text
+          x="67%"
+          y="63%"
+          dominant-baseline="middle"
+          text-anchor="middle"
+          className="text-xl fill-white"
+        >
+          Key Area 2 : 
         </text>
         <text
           x="67%"
@@ -76,7 +94,17 @@ const Homepage: React.FC = () => {
           text-anchor="middle"
           className="text-xl fill-white"
         >
-          Key Area 2 : Risk Mitigation
+          Risk Mitigation
+        </text>
+        <text
+          x="50%"
+          y="93%"
+          dominant-baseline="middle"
+          text-anchor="middle"
+          className="text-xl fill-white"
+        >
+  
+          Key Area 3 : 
         </text>
         <text
           x="50%"
@@ -85,7 +113,7 @@ const Homepage: React.FC = () => {
           text-anchor="middle"
           className="text-xl fill-white"
         >
-          Key Area 3 : Capacity Developement
+          Capacity Developement
         </text>
       </svg>
     </div>
