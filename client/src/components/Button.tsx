@@ -1,34 +1,19 @@
+// I ammended this so that it can accept a label and a name prop and it can call the onClick function when clicked
+// This passes the buttons name (so expected_results) to the parent component which is ExpectedResults.tsx
 import React from "react";
 
 interface ButtonProps {
   label: string;
-  name: string; // added name tag to be able to make the call in DB should be deprecated when we can retrieve all data from Database and store it locally
+  name: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  type?: "button" | "submit" | "reset";
-  disabled?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  label,
-  name, //ibidem
-  onClick,
-  type = "button",
-  disabled = false,
-}) => {
+const Button: React.FC<ButtonProps> = ({ label, name, onClick }) => {
   return (
     <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
       name={name}
-      className={`w-full py-1 px-3 text-white font-medium rounded-md
-       
-        ${
-          disabled
-            ? "bg-gray-400 cursor-not-allowed"
-            : "focus-one hover:bg-teal-800"
-        }
-        focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 text-sm`}
+      onClick={onClick}
+      className="w-full py-1 px-3 text-white font-medium rounded-md focus-one hover:bg-teal-800"
     >
       {label}
     </button>
