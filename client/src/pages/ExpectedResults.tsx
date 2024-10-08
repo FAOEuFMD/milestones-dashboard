@@ -1,78 +1,44 @@
-import React from "react"; //deleted Useeffect
-import { useState } from "react";
+// Here I need to use the context I have set up
+// I need to use useTargetContext() to fetch targets, loading and error values 
+// when the button is clicked, the handleButtonClick() function needs to update the selectName state with its expected_results
+
+import React, { useState } from "react";
+import { useTargetContext } from "../context/TargetContext";
 import Button from "../components/Button";
-import TargetsTable from "../components/TargetsTable";
-// import PlotGraph from "../components/PlotGraph";
+import TargetsTable from "../components/TargetsTable"; // Example of another component that may use targets
 
-interface ExpectedResults {
-  // Define any props here
-}
+const ExpectedResults: React.FC = () => {
+  const { targets, loading, error } = useTargetContext(); // Access data from context
+  const [selectedName, setSelectedName] = useState<string | null>(null); // State to track button selection
 
-//dashboard component
-const ExpectedResults: React.FC<ExpectedResults> = () => {
-  const [showTable, setShowTable] = useState(false); // State to control table visibility
-  // const [name, setName] = useState<string | null>(null); // State to control table visibility
-  const [selectedName, setSelectedName] = useState<string | null>(null);
+  if (loading) return <div>Loading...</div>; // Show loading state
+  if (error) return <div>{error}</div>; // Show error state
 
+  // Handle button click event
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setShowTable(true); // Update state to show the TargetsTable component
-    // sets selectedName as the name property from Button. We have to define that event.target was the button element so typscript knew it had a name:
     const target = event.target as HTMLButtonElement;
-    setSelectedName(target.name);
-
-    console.log(selectedName);
+    setSelectedName(target.name); // Store the selected name from button
   };
-  //trying to shwo the component conditionally
-
-  // const [selectedExpectedResult, SetSelectedExpectedResult] = useState<
-  //   string | null
-  // >(null);
-
-  // const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   const selectedLabel = event.currentTarget.getAttribute("label");
-  //   SetSelectedExpectedResult(selectedLabel);
-  //   console.log(selectedLabel);
-  // };
 
   return (
     <div>
-      {/* Here the title should dsiplay Expected Results for Key area name example 
-       Expected results for Risk Monitring 
-       subtitle text :  Ensure risk information are regularly collected, analyzed and available for risk managers in Member Nations and other countries
-         */}
-      <h1 className="title pt-10">Expected Results for Risk Monitoring </h1>{" "}
+      <h1 className="title pt-10">Expected Results for Risk Monitoring</h1>
       <h3 className="title pt-10">
-        {" "}
-        Ensure risk information are regularly collected, analyzed and available
-        for risk managers in Member Nations and other countries{" "}
-      </h3>{" "}
+        Ensure risk information is regularly collected, analyzed, and available
+      </h3>
       <div className="flex flex-wrap">
-        <div className="w-full md:w-1/3 p-4">
-          {/* This button labels have to be taken from the params to better query de DB */}
-          <Button
-            label="1.1FAST global surveillance sustained and viral intelligence up-scaled"
-            name="1-1" // here every button has the name tag corresponding the the expected results 1.1 since it's not possible to call 1.1 on the routes
-            onClick={handleButtonClick}
-          />
-        </div>
-
-        <div className="w-full md:w-1/3 p-4">
-          <Button
-            label="1.2 Enabled risk monitoring"
-            name="1-2"
-            onClick={handleButtonClick}
-          />
-        </div>
-
-        <div className="w-full md:w-1/3 p-4">
-          <Button
-            label="1.3 Enhanced FAST early warning"
-            name="1-3"
-            onClick={handleButtonClick}
-          />
-        </div>
-        {/* Here you ensure that selectedName has been updated and then pass the selectedName from the button property name to the compenent TargetsTable */}
-        {showTable && selectedName && <TargetsTable dbQ={selectedName} />}
+        {/* Render buttons dynamically from the targets data */}
+        {targets.map((target) => (
+          <div key={target.target_id} className="w-full md:w-1/3 p-4">
+            <Button
+              label={target.target_description}
+              name={target.expected_result}
+              onClick={handleButtonClick}
+            />
+          </div>
+        ))}
+        {/* Optionally render a table or details if a button is selected */}
+        {selectedName && <TargetsTable dbQ={selectedName} />}
       </div>
     </div>
   );
