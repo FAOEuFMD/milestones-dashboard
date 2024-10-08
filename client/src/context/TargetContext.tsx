@@ -29,6 +29,7 @@ export const TargetProvider: React.FC<TargetProviderProps> = ({ children }) => {
     const getTargets = async () => {
       try {
         const data = await fetchTargets();
+        console.log(data); // For debugging purposes, see what data is fetched
         setTargets(data);
       } catch (err) {
         setError("Failed to load targets");
