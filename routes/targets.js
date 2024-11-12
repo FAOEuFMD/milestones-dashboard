@@ -6,7 +6,7 @@ const { fetchAllTargetData, fetchTargetsByKeyArea,
 const router = express.Router();
 
 // Route for fetching all target data
-router.get('/targets', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const result = await fetchAllTargetData();
         console.log('Query result:', result);
