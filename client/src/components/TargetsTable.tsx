@@ -3,12 +3,9 @@ import { useEffect, useState } from "react";
 interface TableData {
   key_area_id: string;
   indicator: string;
-  annual_target: string;
-  q1_2024: string;
-  q2_2024: string;
-  q3_2024: string;
-  q4_2024: string;
-  targetDate: string;
+  target_description: string;
+  result_to_date: string;
+  program_target: string;
 }
 
 interface TargetsTableProps {
@@ -20,21 +17,21 @@ const TargetsTable: React.FC<TargetsTableProps> = ({ dbQ }) => {
 
   const fetchData = async () => {
     try {
-      console.log(`Fetching data from /targets/KeyArea1/expectedresult/${dbQ}`);
+      console.log(`Fetching data from /targets-keyarea1-expectedresult-${dbQ}`);
       const response = await fetch(
-        `http://localhost:5000/api/targets/KeyArea1/expectedresult/${dbQ}`
+        `http://localhost:5000/api/targets-keyarea1-expectedresult-${dbQ}`
       );
       const result = await response.json();
       // Transform data as needed
       const transformedData = result.map((item: any) => ({
         key_area_id: item.key_area_id,
         indicator: item.indicator,
-        annual_target: item.annual_target,
-        q1_2024: item.Q1 || "",
+        target_description: item.target_description || "",
+        result_to_date: item.result_to_date || "",
         q2_2024: item.Q2 || "",
         q3_2024: item.Q3 || "",
         q4_2024: item.Q4 || "",
-        targetDate: item["Target Date"] || "",
+        program_target: item.program_target || "",
       }));
       setData(transformedData);
     } catch (error) {
@@ -73,7 +70,7 @@ const TargetsTable: React.FC<TargetsTableProps> = ({ dbQ }) => {
                 color: "white",
               }}
             >
-              Annual Program Target
+              Target Description
             </th>
             <th
               className="py-2 px-4 border-b border-l border-r"
@@ -84,7 +81,7 @@ const TargetsTable: React.FC<TargetsTableProps> = ({ dbQ }) => {
                 color: "white",
               }}
             >
-              Q1 2024
+              Result to Date
             </th>
             <th
               className="py-2 px-4 border-b border-l border-r"
@@ -95,40 +92,7 @@ const TargetsTable: React.FC<TargetsTableProps> = ({ dbQ }) => {
                 color: "white",
               }}
             >
-              Q2 2024
-            </th>
-            <th
-              className="py-2 px-4 border-b border-l border-r"
-              style={{
-                width: "100px",
-                backgroundImage: "linear-gradient(to bottom, #34C759, #2E865F)",
-                backgroundClip: "padding-box",
-                color: "white",
-              }}
-            >
-              Q3 2024
-            </th>
-            <th
-              className="py-2 px-4 border-b border-l border-r"
-              style={{
-                width: "100px",
-                backgroundImage: "linear-gradient(to bottom, #34C759, #2E865F)",
-                backgroundClip: "padding-box",
-                color: "white",
-              }}
-            >
-              Q4 2024
-            </th>
-            <th
-              className="py-2 px-4 border-b border-l border-r"
-              style={{
-                width: "100px",
-                backgroundImage: "linear-gradient(to bottom, #34C759, #2E865F)",
-                backgroundClip: "padding-box",
-                color: "white",
-              }}
-            >
-              Target Date
+              Program Target
             </th>
           </tr>
         </thead>
@@ -145,22 +109,13 @@ const TargetsTable: React.FC<TargetsTableProps> = ({ dbQ }) => {
                 className="py-2 px-4 border-b border-l border-r"
                 style={{ textAlign: "left" }}
               >
-                {row.annual_target}
+                {row.target_description}
               </td>
               <td className="py-2 px-4 border-b border-l border-r">
-                {row.q1_2024}
+                {row.result_to_date}
               </td>
               <td className="py-2 px-4 border-b border-l border-r">
-                {row.q2_2024}
-              </td>
-              <td className="py-2 px-4 border-b border-l border-r">
-                {row.q3_2024}
-              </td>
-              <td className="py-2 px-4 border-b border-l border-r">
-                {row.q4_2024}
-              </td>
-              <td className="py-2 px-4 border-b border-l border-r">
-                {row.targetDate}
+                {row.program_target}
               </td>
             </tr>
           ))}
