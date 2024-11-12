@@ -17,9 +17,9 @@ const TargetsTable: React.FC<TargetsTableProps> = ({ dbQ }) => {
 
   const fetchData = async () => {
     try {
-      console.log(`Fetching data from /targets-keyarea1-expectedresult-${dbQ}`);
+      console.log(`Fetching data from /targets/keyarea1/expectedresult/${dbQ}`);
       const response = await fetch(
-        `http://localhost:5000/api/targets-keyarea1-expectedresult-${dbQ}`
+        `http://localhost:5000/api/targets/keyarea1/expectedresult/${dbQ}`
       );
       const result = await response.json();
       // Transform data as needed
@@ -28,9 +28,6 @@ const TargetsTable: React.FC<TargetsTableProps> = ({ dbQ }) => {
         indicator: item.indicator,
         target_description: item.target_description || "",
         result_to_date: item.result_to_date || "",
-        q2_2024: item.Q2 || "",
-        q3_2024: item.Q3 || "",
-        q4_2024: item.Q4 || "",
         program_target: item.program_target || "",
       }));
       setData(transformedData);
