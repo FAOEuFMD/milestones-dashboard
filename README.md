@@ -47,7 +47,7 @@ Type `mysql -u root -p` in the terminal to access MySQL and type your password.
 
 In the MySQL terminaL, type `CREATE database dashboard;` to create a database in MySQL.
 
-Run `npm run dev` in your terminal in the project folder. This will create the following the table `milestones`
+Run `npm run migrate` in your terminal in the project folder. This will create the following the table `milestones`
 
 ### Development
 
