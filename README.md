@@ -7,7 +7,6 @@ An open-source dashboard that tracks the completion of yearly EuFMD Program Targ
 - TypeScript (^5.2.2)
 - React (^18.2.0)
 - React Router Dom (^6.22.3)
-- Axios (^1.6.8)
 - Tailwind CSS (^3.4.3)
 - Node.js (v20.13.0)
 - Express.js (~4.16.1)
@@ -37,7 +36,6 @@ Run `npm install` in the project folder to install dependencies related to Expre
 Type `cd client` in the terminal and run `npm install` to install dependencies related to React TypeScript (the client). Check if the following is installed:
 
 - React Router `npm install react-router-dom`
-- Axios `npm install axios`
 - Tailwind CSS (follow this guide: https://tailwindcss.com/docs/guides/vite)
 
 ### Database Prep
