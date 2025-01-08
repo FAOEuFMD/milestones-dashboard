@@ -10,7 +10,7 @@ An open-source dashboard that tracks the completion of yearly EuFMD Program Targ
 - Tailwind CSS (^3.4.3)
 - Node.js (v20.13.0)
 - Express.js (~4.16.1)
-- MySQL (^2.18.1)
+- MySql2 (3.12.0)
 
 ## Project setup
 
