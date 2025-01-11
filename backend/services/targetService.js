@@ -1,5 +1,5 @@
 // src/services/targetService.js
-const TargetData = require('../model/TargetData');
+const TargetData = require('../../model/TargetData');
 
 // Fetch all target data for focus objective with ID = 1
 const fetchAllTargetData = async () => {
