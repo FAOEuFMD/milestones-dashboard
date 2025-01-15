@@ -83,13 +83,14 @@ const Homepage: React.FC = () => {
         </svg>
         {/* Static InfoButtons below each corresponding text */}
           <div className="absolute top-[40%] left-[40%]">
-            <InfoButton infoText={infoData[0].focus_objective_name_1} />
+            {/* Need to have optional string to send to infoText because of infoData.ts type, but should not affect display */}
+            <InfoButton infoText={infoData[0].focus_objective_name_1 ?? "No information available"} />
           </div>
           <div className="absolute top-[40%] left-[60%]">
-            <InfoButton infoText={infoData[1].focus_objective_name_2} />
+            <InfoButton infoText={infoData[1].focus_objective_name_2 ?? "No information available"} />
           </div>
           <div className="absolute top-[75%] left-[50%]">
-            <InfoButton infoText={infoData[2].focus_objective_name_3} />
+            <InfoButton infoText={infoData[2].focus_objective_name_3 ?? "No information available"} />
           </div>
         </div>
       </div>
