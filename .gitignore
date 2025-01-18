@@ -6,6 +6,9 @@ node_modules/
 # Environment variable files
 .env
 
+# database and backend configuration
+config.py
+
 # Build directories
 /dist
 /build
@@ -34,3 +37,6 @@ node_modules/
 # Ignore IDE configurations
 .vscode/
 .idea/
+
+# Python virtual environment
+venv/
