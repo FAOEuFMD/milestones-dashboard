@@ -294,7 +294,7 @@ class Table512b(db.Model):
 
 class Table521a(db.Model):
     __tablename__ = '5.2.1.a'
-    id = db.Column(db.BigInteger, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     country = db.Column(db.Text, nullable=True)
     year = db.Column(db.BigInteger, nullable=True)
     PCP_stage = db.Column(db.Text, nullable=True)
@@ -316,7 +316,7 @@ class Table521a(db.Model):
 
 class Table521b(db.Model):
     __tablename__ = '5.2.1.b'
-    id = db.Column(db.BigInteger, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     course_fullname = db.Column(db.Text, nullable=True)
     course_shortname = db.Column(db.Text, nullable=True)
     main_topic = db.Column(db.Text, nullable=True)
@@ -325,10 +325,11 @@ class Table521b(db.Model):
     eufmd_na = db.Column(db.Double, nullable=True) 
     eufmd_me = db.Column(db.Double, nullable=True)
     eufmd_seen = db.Column(db.Double, nullable=True)
-    in_region = db.Column(db.TinyInt, nullable=True)
+    in_region = db.Column(db.Integer, nullable=True)
 
     def to_json(self):
         return {
+            "id": self.id,
             "courseFullname": self.course_fullname,
             "courseShortname": self.course_shortname,
             "mainTopic": self.main_topic,
@@ -338,12 +339,11 @@ class Table521b(db.Model):
             "eufmdMe": self.eufmd_me,
             "eufmdSeen": self.eufmd_seen,
             "inRegion": self.in_region,
-            "id": self.id,
         }
 
 class Table611a(db.Model):
     __tablename__ = '6.1.1.a'
-    id = db.Column(db.BigInteger, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     course_shortname = db.Column(db.Text, nullable=True)
     course_fullname = db.Column(db.Text, nullable=True)
     start_date = db.Column(db.DateTime, nullable=True)
@@ -363,18 +363,20 @@ class Table611a(db.Model):
 
 class Table611b(db.Model):
     __tablename__ = '6.1.1.b'
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     unique_user_id = db.Column(db.BigInteger, nullable=True)
     course_completion_date = db.Column(db.Date, nullable=True)
 
     def to_json(self):
         return {
+            "id": self.id,
             "uniqueUserId": self.unique_user_id,
             "courseCompletionDate": self.course_completion_date,
         }
 
 class Table621a(db.Model):
     __tablename__ = '6.2.1.a'
-    id = db.Column(db.BigInteger, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     course_fullname = db.Column(db.Text, nullable=True)
     course_shortname = db.Column(db.Text, nullable=True)
     main_topic = db.Column(db.Text, nullable=True)
@@ -396,7 +398,7 @@ class Table621a(db.Model):
 
 class Table621b(db.Model):
     __tablename__ = '6.2.1.b'
-    id = db.Column(db.BigInteger, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     course_fullname = db.Column(db.Text, nullable=True)
     course_shortname = db.Column(db.Text, nullable=True)
     main_topic = db.Column(db.Text, nullable=True)
@@ -418,7 +420,7 @@ class Table621b(db.Model):
 
 class Table622a(db.Model):
     __tablename__ = '6.2.2.a'
-    id = db.Column(db.BigInteger, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     course_fullname = db.Column(db.Text, nullable=True)
     course_shortname = db.Column(db.Text, nullable=True)
     start_date = db.Column(db.DateTime, nullable=True)
