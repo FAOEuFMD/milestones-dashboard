@@ -2,8 +2,9 @@ import sys
 import os
 sys.path.append(os.path.abspath('../'))
 from config import app, db
+from models import fetch_all_target_data
+from flask import request, jsonify, Blueprint
 
-from flask import request, jsonify
 # There has to be a better way to do the models import
 from models import Targets, FocusObjectives, KeyAreas, Table121b, Table132c, Table311a, Table311b, Table321a, Table411a, Table421a, Table431a, Table512b, Table521a, Table521b, Table611a, Table611b, Table621a, Table621b, Table622a
 
@@ -24,11 +25,19 @@ from models import Targets, FocusObjectives, KeyAreas, Table121b, Table132c, Tab
 #     }
 # });
 
+
+
 @app.route("/", methods=["GET"] )
 def get_all_target_data():
-    targets = Targets.query.all()
-    json_targets = list(map(lambda x: x.to_json(), targets))
-    return jsonify({"targets": json_targets})
+    try:
+        result = fetch_all_target_data()
+        return jsonify([dict(row) for row in result])
+    except Exception as error:
+        print(f"Error retrieving targets: {error}")
+        return jsonify({'message': 'Database query failed'}), 500
+
+
+
 
 if __name__ == "__main__":
     with app.app_context():
