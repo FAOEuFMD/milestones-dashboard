@@ -31,7 +31,7 @@ from models import Targets, FocusObjectives, KeyAreas, Table121b, Table132c, Tab
 def get_all_target_data():
     try:
         result = fetch_all_target_data()
-        return jsonify([dict(row) for row in result])
+        return jsonify(result)
     except Exception as error:
         print(f"Error retrieving targets: {error}")
         return jsonify({'message': 'Database query failed'}), 500

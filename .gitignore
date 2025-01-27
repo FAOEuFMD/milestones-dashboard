@@ -40,3 +40,6 @@ config.py
 
 # Python virtual environment
 venv/
+
+# PyCache files
+__pycache__

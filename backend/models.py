@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Date, Integer, String, Text
 from config import db
@@ -7,6 +7,27 @@ from config import app
 
 # Create the database engine using the imported URI
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
+
+def fetch_all_target_data():
+    query = text("""
+    SELECT
+        focus_objectives.id AS focus_objective_id,
+        focus_objectives.name AS focus_objective_name,
+        key_areas.id AS key_area_id,
+        key_areas.name AS key_area_name,
+        targets.target_id,
+        targets.indicator,
+        targets.target_description,
+        targets.result_to_date,
+        targets.program_target,
+        targets.expected_result
+    FROM focus_objectives
+    JOIN key_areas ON focus_objectives.id = key_areas.focus_objectives_id
+    JOIN targets ON key_areas.id = targets.key_area_id
+    """)
+    result = db.session.execute(query).fetchall()
+    colnames = ['focus_objective_id', 'focus_objective_name', 'key_area_id', 'key_area_name', 'target_id', 'indicator', 'target_description', 'result_to_date', 'program_target', 'expected_result']
+    return [dict(zip(colnames, row)) for row in result]
 
 
 class Targets(db.Model):
@@ -68,30 +89,6 @@ class KeyAreas(db.Model):
             "name": self.name,
             "management": self.management,
         }
-
-
-
-def fetch_all_target_data():
-    query = """
-    SELECT
-        focus_objectives.id AS focus_objective_id,
-        focus_objectives.name AS focus_objective_name,
-        key_areas.id AS key_area_id,
-        key_areas.name AS key_area_name,
-        targets.target_id,
-        targets.indicator,
-        targets.target_description,
-        targets.result_to_date,
-        targets.program_target,
-        targets.expected_result
-    FROM focus_objectives
-    JOIN key_areas ON focus_objectives.id = key_areas.focus_objectives_id
-    JOIN targets ON key_areas.id = targets.key_area_id
-    """
-    result = db.session.execute(query)
-    return result.all()
-
-
 
 
 class Table121b(db.Model):
