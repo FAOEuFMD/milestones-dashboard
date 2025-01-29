@@ -10,7 +10,7 @@ import PlotGraph from "./components/PlotGraph";
 
 const App: React.FC = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-[#629978] bg-opacity-10">
       <Router>
         <Navbar />
         <Routes>

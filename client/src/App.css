@@ -4,9 +4,6 @@
 
   text-align: center;
 }
-body {
-  background-color: #5e967543;
-}
 
 .logo {
   height: 6em;
@@ -38,15 +35,6 @@ body {
   fill: white;
 }
 
-.nav {
-  background-color: #5E9675; 
-}
-
-.background-hue {
-  background-color: #5e967543;
-
-}
-
 .focus-one {
   background-color: #2B9866;
 }
@@ -57,11 +45,4 @@ body {
 
 .focus-three {
   background-color: #018877;
-}
-
-h1 { 
-  font-weight: bold;
-  font-size: 40px;
-  color: #446f56;
-
 }

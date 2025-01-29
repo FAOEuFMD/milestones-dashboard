@@ -12,7 +12,7 @@ const Homepage: React.FC = () => {
 
   return (
     <div>
-      <h1 className="title pt-10">EuFMD Milestones</h1>
+      <h1 className="page-heading">EuFMD Milestones</h1>
       <div className="relative h-screen mx-auto">
         {/* Circle setup for focus areas */}
         <div className="absolute inset-0 flex items-center justify-center p-10">
