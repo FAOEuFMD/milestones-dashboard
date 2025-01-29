@@ -5,14 +5,14 @@ import logo from "../assets/EuFMD_2023_white_xl.png";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="nav w-full bg-[#018877]">
-      <div className="container mx-4">
+    <nav className="nav w-full bg-gradient-to-t from-[#018877] to-[#048B5D] py-0 h-16 flex items-center">
+      <div className="container ml-4 mt-0 mb-0">
         <div className="flex justify-between items-center">
           <Link to="/">
             <img
               src={logo}
               alt="FAO Logo"
-              className="max-h-24 max-w-xs h-auto w-auto"
+              className="max-h-20 max-w-xs h-auto w-auto"
             />
           </Link>
         </div>

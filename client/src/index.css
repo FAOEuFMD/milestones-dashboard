@@ -4,6 +4,6 @@
 
 @layer components {
     .page-heading {
-        @apply font-bold text-4xl pt-4;
+        @apply font-bold text-4xl pt-4 pb-4;
     }
 }
