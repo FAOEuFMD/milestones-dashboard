@@ -40,7 +40,7 @@ const ExpectedResults: React.FC<ExpectedResults> = () => {
        Expected results for Risk Monitring 
        subtitle text :  Ensure risk information are regularly collected, analyzed and available for risk managers in Member Nations and other countries
          */}
-      <h1 className="title pt-10">Expected Results for Risk Monitoring </h1>{" "}
+      <h1 className="page-heading">Expected Results for Risk Monitoring </h1>{" "}
       <h3 className="title pt-10">
         {" "}
         Ensure risk information are regularly collected, analyzed and available

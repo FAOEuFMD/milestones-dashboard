@@ -12,14 +12,14 @@ const Homepage: React.FC = () => {
 
   return (
     <div>
-      <h1 className="title pt-10">EuFMD Milestones</h1>
+      <h1 className="page-heading">EuFMD Milestones</h1>
       <div className="relative h-screen mx-auto">
         {/* Circle setup for focus areas */}
         <div className="absolute inset-0 flex items-center justify-center p-10">
           <div className="container relative min-w-[600px] max-w-[600px] h-[600px] rounded-full bg-white overflow-hidden flex items-center justify-center border-2 border-white">
             <div
               id="focusThree"
-              className="polypieceInner absolute w-full h-full focus-three hover:bg-teal-800"
+              className="polypieceInner absolute w-full h-full bg-darkTeal hover:bg-greyGreen"
               style={{
                 clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
                 transform: "rotate(74deg)",
@@ -28,7 +28,7 @@ const Homepage: React.FC = () => {
             ></div>
             <div
               id="focusTwo"
-              className="polypieceInner absolute w-full h-full focus-two hover:bg-teal-800"
+              className="polypieceInner absolute w-full h-full bg-darkGreen hover:bg-greyGreen"
               style={{
                 clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
                 transform: "rotate(194deg)",
@@ -37,7 +37,7 @@ const Homepage: React.FC = () => {
             ></div>
             <div
               id="focusOne"
-              className="polypieceInner absolute w-full h-full focus-one hover:bg-teal-800"
+              className="polypieceInner absolute w-full h-full bg-lighterTeal hover:bg-greyGreen"
               style={{
                 clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
                 transform: "rotate(314deg)",
@@ -58,7 +58,7 @@ const Homepage: React.FC = () => {
             y="38%"
             dominantBaseline="middle"
             textAnchor="middle"
-            className="text-3xl fill-white"
+            className="circle-text"
           >
             Protection of Livestock
           </text>
@@ -67,7 +67,7 @@ const Homepage: React.FC = () => {
             y="38%"
             dominantBaseline="middle"
             textAnchor="middle"
-            className="text-3xl fill-white"
+            className="circle-text"
           >
             Respond to Crises
           </text>
@@ -76,7 +76,7 @@ const Homepage: React.FC = () => {
             y="73%"
             dominantBaseline="middle"
             textAnchor="middle"
-            className="text-3xl fill-white"
+            className="circle-text"
           >
             Control of Diseases
           </text>
