@@ -3,6 +3,7 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 import InfoButton from "../components/InfoButton";
 import infoData from "../infoData";
+import Footer from "../components/Footer";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Homepage: React.FC = () => {
       <h1 className="page-heading">EuFMD Milestones</h1>
       <div className="relative h-screen mx-auto">
         {/* Circle setup for focus areas */}
-        <div className="absolute inset-0 flex items-center justify-center p-10">
+        <div className="absolute inset-0 flex items-center justify-center">
           <div className="container relative min-w-[600px] max-w-[600px] h-[600px] rounded-full bg-white overflow-hidden flex items-center justify-center border-2 border-white">
             <div
               id="focusThree"
@@ -93,6 +94,9 @@ const Homepage: React.FC = () => {
             <InfoButton infoText={infoData[2].focus_objective_name_3 ?? "No information available"} />
           </div>
         </div>
+
+        {/* Footer */}
+        <Footer />
       </div>
   );
 };

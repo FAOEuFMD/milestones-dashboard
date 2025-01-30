@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/KeyAreas" element={<FocusObjectives />} />{" "}
+          <Route path="/KeyAreas" element={<FocusObjectives />} />
           {/* Updated path */}
           <Route
             path="/KeyAreas/expectedresults"
