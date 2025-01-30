@@ -5,7 +5,7 @@
 /* Tailwind styles */
 @layer components {
     .page-heading {
-        @apply font-bold text-4xl pt-4 pb-4 text-center;
+        @apply font-bold text-4xl pt-5 pb-2 text-center;
     }
 
     .circle-text {
