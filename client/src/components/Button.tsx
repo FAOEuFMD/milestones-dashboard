@@ -25,8 +25,8 @@ const Button: React.FC<ButtonProps> = ({
        
         ${
           disabled
-            ? "bg-gray-400 cursor-not-allowed"
-            : "focus-one hover:bg-teal-800"
+            ? "bg-darkGreen cursor-not-allowed"
+            : "hover:bg-greyGreen"
         }
         focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 text-sm`}
     >

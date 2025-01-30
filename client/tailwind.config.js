@@ -18,12 +18,3 @@ module.exports = {
   },
   plugins: [],
 }
-
-
-/*
-048B5D dark green
-018877 dark teal
-28949C bright blue
-38938C lighter teal
-629978 grey green 
-*/

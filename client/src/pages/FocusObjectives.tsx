@@ -24,7 +24,7 @@ const Keyarea: React.FC<KeyareaProps> = () => {
 
   return (
     <div>
-      <h1 className="title pt-10">Key Areas of Risk Monitoring</h1>
+      <h1 className="page-heading">Key Areas of Risk Monitoring</h1>
       <div className="flex flex-wrap">
         {/* Expected Results Button */}
         <div className="w-full md:w-1/3 p-4">
