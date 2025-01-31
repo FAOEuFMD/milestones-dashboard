@@ -4,12 +4,68 @@ import { useNavigate } from "react-router-dom";
 import InfoButton from "../components/InfoButton";
 import infoData from "../infoData";
 import Footer from "../components/Footer";
+import { useEffect, useState } from 'react';
+
+interface FocusObjective {
+  id: number;
+  name: string;
+}
+
+// interface for mapping through all data in api call
+interface RawFocusObjective {
+  focus_objective_id: number;
+  focus_objective_name: string;
+  [key: string]: any // accounts for all additional properties
+}
 
 const Homepage: React.FC = () => {
+  // State for Focus Objective data
+  const [focus, setFocus] = useState<FocusObjective[]>([]);
   const navigate = useNavigate();
-  
+
+  // Call getFocus on mount
+  useEffect(() => {
+    getFocus();
+  }, []);
+
+  // Call API for Focus Objective data
+  const getFocus = async () => {
+    try {
+      const results = await fetch('api/targets');
+      const json = await results.json();
+
+      // Extract just name and id
+      const extracted: FocusObjective[] = json.map((item: RawFocusObjective) => ({
+        id: item.focus_objective_id,
+        name: item.focus_objective_name
+      }));
+
+      // Remove duplicates by id
+      let uniqueFocus: FocusObjective[] = [];
+      let seen: number[] = [];
+
+      for (const obj of extracted) {
+        // If we haven't seen this id
+        if (!seen.includes(obj.id)) {
+          // push it to seen
+          seen.push(obj.id);
+          // add the whole object to uniqueFocus
+          uniqueFocus.push(obj);
+        }
+        // Stop when we hit 3 for performance
+        if (uniqueFocus.length === 3) break;
+      }
+
+      setFocus(uniqueFocus);
+    } catch (error) {
+      console.log("Error fetching focus objectives: ", error);
+    }
+  }
+
   // Navigate to Key area number
-  const takeToKeyarea = () => navigate("/Keyareas");
+  // const takeToKeyArea = (id: number) => navigate(`/focus-objective/${id}`);
+
+  console.log(focus);
 
   return (
     <div>
@@ -25,7 +81,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
                 transform: "rotate(74deg)",
               }}
-              onClick={takeToKeyarea}
+              // onClick={takeToKeyArea}
             ></div>
             <div
               id="focusTwo"
@@ -34,7 +90,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
                 transform: "rotate(194deg)",
               }}
-              onClick={takeToKeyarea}
+              // onClick={takeToKeyarea}
             ></div>
             <div
               id="focusOne"
@@ -43,7 +99,7 @@ const Homepage: React.FC = () => {
                 clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
                 transform: "rotate(314deg)",
               }}
-              onClick={takeToKeyarea}
+              // onClick={takeToKeyarea}
             ></div>
           </div>
         </div>
