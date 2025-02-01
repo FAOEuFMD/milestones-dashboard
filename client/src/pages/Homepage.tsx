@@ -2,7 +2,6 @@ import React from "react";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import InfoButton from "../components/InfoButton";
-import infoData from "../infoData";
 import Footer from "../components/Footer";
 import { useEffect, useState } from 'react';
 
@@ -64,8 +63,6 @@ const Homepage: React.FC = () => {
 
   // Navigate to Key area number
   // const takeToKeyArea = (id: number) => navigate(`/focus-objective/${id}`);
-
-  console.log(focus);
 
   return (
     <div>
@@ -138,17 +135,20 @@ const Homepage: React.FC = () => {
             Control of Diseases
           </text>
         </svg>
-        {/* Static InfoButtons below each corresponding text */}
-          <div className="absolute top-[40%] left-[40%]">
-            {/* Need to have optional string to send to infoText because of infoData.ts type, but should not affect display */}
-            <InfoButton infoText={infoData[0].focus_objective_name_1 ?? "No information available"} />
-          </div>
-          <div className="absolute top-[40%] left-[60%]">
-            <InfoButton infoText={infoData[1].focus_objective_name_2 ?? "No information available"} />
-          </div>
-          <div className="absolute top-[75%] left-[50%]">
-            <InfoButton infoText={infoData[2].focus_objective_name_3 ?? "No information available"} />
-          </div>
+        {/* InfoButtons */}
+        {focus.length > 0 && (
+          <>
+            <div className="absolute top-[40%] left-[40%]">
+              <InfoButton infoText={focus[0]?.name || ""} />
+            </div>
+            <div className="absolute top-[40%] left-[60%]">
+              <InfoButton infoText={focus[1]?.name || ""} />
+            </div>
+            <div className="absolute top-[75%] left-[50%]">
+              <InfoButton infoText={focus[2]?.name  || ""} />
+            </div>
+          </>
+        )}
         </div>
 
         {/* Footer */}
