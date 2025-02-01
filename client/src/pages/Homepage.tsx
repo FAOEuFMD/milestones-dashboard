@@ -61,8 +61,8 @@ const Homepage: React.FC = () => {
     }
   }
 
-  // Navigate to Key area number
-  // const takeToKeyArea = (id: number) => navigate(`/focus-objective/${id}`);
+  // Navigate to KeyArea for selected focus objective
+  const takeToKeyArea = (id: number) => navigate(`/focus-objective/${id}`);
 
   return (
     <div>
@@ -71,33 +71,41 @@ const Homepage: React.FC = () => {
         {/* Circle setup for focus areas */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="container relative min-w-[600px] max-w-[600px] h-[600px] rounded-full bg-white overflow-hidden flex items-center justify-center border-2 border-white">
-            <div
-              id="focusThree"
-              className="polypieceInner absolute w-full h-full bg-darkTeal hover:bg-greyGreen"
-              style={{
-                clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
-                transform: "rotate(74deg)",
-              }}
-              // onClick={takeToKeyArea}
-            ></div>
-            <div
-              id="focusTwo"
-              className="polypieceInner absolute w-full h-full bg-darkGreen hover:bg-greyGreen"
-              style={{
-                clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
-                transform: "rotate(194deg)",
-              }}
-              // onClick={takeToKeyarea}
-            ></div>
-            <div
-              id="focusOne"
-              className="polypieceInner absolute w-full h-full bg-lighterTeal hover:bg-greyGreen"
-              style={{
-                clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
-                transform: "rotate(314deg)",
-              }}
-              // onClick={takeToKeyarea}
-            ></div>
+            {/* Clickable pieces leading to KeyArea */}
+            {focus.length > 0 && (
+              <>
+                {/* Protection of Livestock */}
+                <div
+                  className="polypieceInner absolute w-full h-full bg-darkGreen hover:bg-greyGreen"
+                  style={{
+                    clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
+                    transform: "rotate(194deg)",
+                  }}
+                  onClick={() => takeToKeyArea(focus[0].id)}
+                ></div>
+
+                {/* Respond to Crises */}
+                <div
+                  className="polypieceInner absolute w-full h-full bg-lighterTeal hover:bg-greyGreen"
+                  style={{
+                    clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
+                    transform: "rotate(314deg)",
+                  }}
+                  onClick={() => takeToKeyArea(focus[1].id)}
+                ></div>
+
+                {/* Control of Diseases */}
+                <div
+                  className="polypieceInner absolute w-full h-full bg-darkTeal hover:bg-greyGreen"
+                  style={{
+                    clipPath: "polygon(50.3% 50%, 100% 1%, 100% 240%)",
+                    transform: "rotate(74deg)",
+                  }}
+                  onClick={() => takeToKeyArea(focus[2].id)}
+                ></div>
+              </>
+            )}
+
           </div>
         </div>
         {/* SVG set up and text/line inserts that overlay the circle */}
