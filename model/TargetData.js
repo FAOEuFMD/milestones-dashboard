@@ -25,6 +25,14 @@ const getAllTargetData = async () => {
     const {rows} = await db.query(baseQuery);
     return rows;
 };
+ 
+// TEMP function to get data filtered by focus objective id
+const filterByFocus = async (focus_objective_id) => {
+    const query = baseQuery + "WHERE focus_objectives.id = ?";
+    const {rows} = await db.query(query, [focus_objective_id]);
+    return rows;
+}
+
 
 // Function to get target data filtered by key_area_id
 const getTargetsByKeyArea = async (keyAreaId) => {
@@ -47,4 +55,4 @@ const getTargetsByKeyAreaAndExpectedResult = async (keyAreaId, expectedResult) =
     return rows;
 };
 
-module.exports = { getAllTargetData, getTargetsByKeyArea, getTargetsByExpectedResult, getTargetsByKeyAreaAndExpectedResult };
+module.exports = { filterByFocus, getAllTargetData, getTargetsByKeyArea, getTargetsByExpectedResult, getTargetsByKeyAreaAndExpectedResult };

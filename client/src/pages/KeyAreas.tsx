@@ -1,17 +1,23 @@
 // import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import "../App.css";
 
-interface KeyareaProps {
-  // Define any props here
+// Type for url params
+type RouteParams = {
+  focusObjectiveId: string;
 }
 
-const KeyAreas: React.FC<KeyareaProps> = () => {
-  //We need the active area to keep the page working, however we're not using it
-  // const [activeArea, setActiveArea] = useState<string | null>(null);
+const KeyAreas: React.FC = () => {
+  // Get focus objective id from the url
+  const { focusObjectiveId } = useParams<RouteParams>();
+  // Convert to number for use in API request
+  const numberId = Number(focusObjectiveId);
 
   const navigate = useNavigate();
+
+  // Get data filtered by focus objective
+  
 
   const handleButtonClick = () => {
     // deleted the name param because everything was hardcoded we should use Irene's dynamic choosing once the DB data is correct
