@@ -7,7 +7,7 @@ interface KeyareaProps {
   // Define any props here
 }
 
-const Keyarea: React.FC<KeyareaProps> = () => {
+const KeyAreas: React.FC<KeyareaProps> = () => {
   //We need the active area to keep the page working, however we're not using it
   // const [activeArea, setActiveArea] = useState<string | null>(null);
 
@@ -19,7 +19,7 @@ const Keyarea: React.FC<KeyareaProps> = () => {
     //This is the dynamic choosing of the url for the DBq uery
     // navigate(`/keyarea/${name.toLowerCase().replace(/\s+/g, "")}`); => Irene put this in your CV
 
-    navigate("/Keyareas/expectedresults");
+    navigate("/KeyAreas/Targets");
   };
 
   return (
@@ -57,4 +57,4 @@ const Keyarea: React.FC<KeyareaProps> = () => {
   );
 };
 
-export default Keyarea;
+export default KeyAreas;

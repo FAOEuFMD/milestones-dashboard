@@ -9,7 +9,7 @@ interface ExpectedResults {
 }
 
 //dashboard component
-const ExpectedResults: React.FC<ExpectedResults> = () => {
+const Targets: React.FC<ExpectedResults> = () => {
   const [showTable, setShowTable] = useState(false); // State to control table visibility
   // const [name, setName] = useState<string | null>(null); // State to control table visibility
   const [selectedName, setSelectedName] = useState<string | null>(null);
@@ -78,4 +78,4 @@ const ExpectedResults: React.FC<ExpectedResults> = () => {
   );
 };
 
-export default ExpectedResults;
+export default Targets;
