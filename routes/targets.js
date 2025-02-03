@@ -3,6 +3,7 @@ const express = require('express');
 const { fetchAllTargetData, fetchTargetsByKeyArea, 
   fetchTargetsByExpectedResult, fetchTargetsByKeyAreaAndExpectedResult } 
   = require('../services/targetService');
+const { filterByFocus } = require('../model/TargetData');
 const router = express.Router();
 
 // Route for fetching all target data
@@ -16,6 +17,18 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Database query failed' });
     }
 });
+
+// TEMP route for fetching data filtered by focus objective
+router.get('/focus_objective/:focus_objective_id', async (req, res) => {
+    const {focus_objective_id} = req.params;
+    try {
+        const result = await filterByFocus(focus_objective_id);
+        res.json(result);
+    } catch (error) {
+        console.log("Error fetching by focus objective", error);
+        res.status(500).json({ message: 'Database query failed' });
+    }
+})
 
 // Route for fetching targets by key_area_id
 router.get('/targets/key_area/:keyAreaId', async (req, res) => {
