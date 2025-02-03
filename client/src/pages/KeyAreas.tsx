@@ -2,15 +2,34 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import "../App.css";
+import axios from "axios";
 
 // Type for url params
 type RouteParams = {
   focusObjectiveId: string;
 }
 
+// Interface for row data
+interface RowData {
+  expected_result: string;
+  focus_objective_id: number;
+  focus_objective_name: string;
+  indicator: string;
+  key_area_id: number;
+  key_area_name: string;
+  program_target: number;
+  result_to_date: number;
+  target_description: string;
+  target_id: string;
+  target_timeframe: string;
+}
+
 const KeyAreas: React.FC = () => {
   // State for title display
   const [title, setTitle] = useState<string>("");
+
+  // State for data filtered by focus objective and grouped by key area
+
 
   // Get focus objective id from the url
   const { focusObjectiveId } = useParams<RouteParams>();
@@ -19,14 +38,41 @@ const KeyAreas: React.FC = () => {
 
   const navigate = useNavigate();
 
-    // Call functions on mount
+  // Call functions on mount
     useEffect(() => {
       keyAreaTitle();
-    }, []);
+      if (numberId) fetchData(numberId);
+  }, [numberId]);
 
   // Get data filtered by focus objective
+  const fetchData = async (id: number) => {
+    try {
+      const response = await axios.get(`/api/targets/focus_objective/${id}`);
 
-  // Set title based on focus objective param
+      // Group data by key area so we can map through them. Data will be an array with one object corresponding to each key area id: [ {keyAreaId: id, items: [rows for that key area]}, etc. ]
+      
+      const groupedByKeyArea = response.data.reduce((acc: {key_area_id: number, items: RowData[]}[], item: RowData) => {
+        // Find if there's already an object in the accumulator with this key area id
+        const existingGroup = acc.find(group => group.key_area_id === item.key_area_id);
+
+        // If found, push the item into the existing group
+        if (existingGroup) {
+          existingGroup.items.push(item);
+        } else {
+          // If not found, make new group and add it to accumulator
+          acc.push({key_area_id: item.key_area_id, items: [item]});
+        }
+        return acc;
+        // Initialize accumulator as an empty array
+      }, []);
+
+      console.log(groupedByKeyArea);
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  }
+
+  // Set shortened title based on focus objective param
   const keyAreaTitle = () => {
     if (numberId === 1) setTitle("Protection of Livestock");
     else if (numberId === 2) setTitle("Respond to Crises");

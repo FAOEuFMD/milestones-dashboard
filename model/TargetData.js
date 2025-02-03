@@ -13,7 +13,8 @@ const baseQuery =
   targets.target_description,
   targets.result_to_date,
   targets.program_target,
-  targets.expected_result
+  targets.expected_result,
+  targets.target_timeframe
   FROM focus_objectives
   JOIN key_areas ON focus_objectives.id = key_areas.focus_objectives_id
   JOIN targets ON key_areas.id = targets.key_area_id
