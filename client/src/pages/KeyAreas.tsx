@@ -24,12 +24,18 @@ interface RowData {
   target_timeframe: string;
 }
 
+// Interface for data grouped by key area id
+interface GroupedKeyArea {
+  key_area_id: number;
+  items: RowData[];
+}
+
 const KeyAreas: React.FC = () => {
   // State for title display
   const [title, setTitle] = useState<string>("");
 
   // State for data filtered by focus objective and grouped by key area
-
+  const [keyAreaData, setKeyAreaData] = useState<GroupedKeyArea[]>([]);
 
   // Get focus objective id from the url
   const { focusObjectiveId } = useParams<RouteParams>();
@@ -66,11 +72,13 @@ const KeyAreas: React.FC = () => {
         // Initialize accumulator as an empty array
       }, []);
 
-      console.log(groupedByKeyArea);
+      setKeyAreaData(groupedByKeyArea);
     } catch (error) {
       console.error('Error fetching data: ', error);
     }
   }
+
+  console.log(keyAreaData);
 
   // Set shortened title based on focus objective param
   const keyAreaTitle = () => {
@@ -93,6 +101,13 @@ const KeyAreas: React.FC = () => {
   return (
     <div>
       <h1 className="page-heading">{title} Key Areas</h1>
+
+      {keyAreaData.length > 0 && (
+        <>
+          
+        </>
+      )}
+
       <div className="flex flex-wrap">
         {/* Expected Results Button */}
         <div className="w-full md:w-1/3 p-4">
