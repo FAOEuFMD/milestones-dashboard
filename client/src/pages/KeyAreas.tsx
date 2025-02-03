@@ -1,4 +1,4 @@
-// import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import "../App.css";
@@ -9,6 +9,9 @@ type RouteParams = {
 }
 
 const KeyAreas: React.FC = () => {
+  // State for title display
+  const [title, setTitle] = useState<string>("");
+
   // Get focus objective id from the url
   const { focusObjectiveId } = useParams<RouteParams>();
   // Convert to number for use in API request
@@ -16,8 +19,21 @@ const KeyAreas: React.FC = () => {
 
   const navigate = useNavigate();
 
+    // Call functions on mount
+    useEffect(() => {
+      keyAreaTitle();
+    }, []);
+
   // Get data filtered by focus objective
-  
+
+  // Set title based on focus objective param
+  const keyAreaTitle = () => {
+    if (numberId === 1) setTitle("Protection of Livestock");
+    else if (numberId === 2) setTitle("Respond to Crises");
+    else if (numberId === 3) setTitle("Control of Diseases");
+    else setTitle("");
+  }
+
 
   const handleButtonClick = () => {
     // deleted the name param because everything was hardcoded we should use Irene's dynamic choosing once the DB data is correct
@@ -30,7 +46,7 @@ const KeyAreas: React.FC = () => {
 
   return (
     <div>
-      <h1 className="page-heading">Key Areas of Risk Monitoring</h1>
+      <h1 className="page-heading">{title} Key Areas</h1>
       <div className="flex flex-wrap">
         {/* Expected Results Button */}
         <div className="w-full md:w-1/3 p-4">
