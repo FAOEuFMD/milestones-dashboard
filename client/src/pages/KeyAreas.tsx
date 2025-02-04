@@ -2,31 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
+import * as d3 from "d3";
+import {RowData, GroupedKeyArea} from "../types/interfaces.ts"
+import {formatKeyAreaName} from "./KeyAreasFunctions.ts"
 
 // Type for url params
 type RouteParams = {
   focusObjectiveId: string;
-}
-
-// Interface for row data
-interface RowData {
-  expected_result: string;
-  focus_objective_id: number;
-  focus_objective_name: string;
-  indicator: string;
-  key_area_id: number;
-  key_area_name: string;
-  program_target: number;
-  result_to_date: number;
-  target_description: string;
-  target_id: string;
-  target_timeframe: string;
-}
-
-// Interface for data grouped by key area id
-interface GroupedKeyArea {
-  key_area_id: number;
-  items: RowData[];
 }
 
 const KeyAreas: React.FC = () => {
@@ -45,7 +27,7 @@ const KeyAreas: React.FC = () => {
 
   // Call functions on mount
     useEffect(() => {
-      keyAreaTitle();
+      if (numberId) keyAreaTitle(numberId);
       if (numberId) fetchData(numberId);
   }, [numberId]);
 
@@ -79,29 +61,15 @@ const KeyAreas: React.FC = () => {
 
   console.log(keyAreaData);
 
+  const takeToTargets = (focusId: number, keyId: number) => navigate(`/focus-objective/${focusId}/key-area/${keyId}`);
+
   // Set shortened title based on focus objective param
-  const keyAreaTitle = () => {
+  const keyAreaTitle = (numberId: number) => {
     if (numberId === 1) setTitle("Protection of Livestock");
     else if (numberId === 2) setTitle("Respond to Crises");
     else if (numberId === 3) setTitle("Control of Diseases");
     else setTitle("");
   };
-
-  // Split Key Area name into two parts based on brackets to format separately
-  const formatKeyAreaName = (name: string): [string, string] => {
-    // Get indices of brackets
-    const openBracket = name.indexOf('[');
-    const closeBracket = name.indexOf(']');
-    // get part inside brackets and make all uppercase
-    const insideBracket = name.slice(openBracket + 1, closeBracket).toUpperCase().trim();
-    // get part after brackets
-    const outsideBracket = name.slice(closeBracket + 1).trim();
-    // return as an array
-    return [insideBracket, outsideBracket]
-  };
-
-  // Navigate to Targets for selected Key Area
-  const takeToTargets = (focusId: number, keyId: number) => navigate(`/focus-objective/${focusId}/key-area/${keyId}`);
 
   return (
     <div>
@@ -117,11 +85,14 @@ const KeyAreas: React.FC = () => {
               className="bg-white shadow-md rounded-md p-4 border border-gray-200 w-96 cursor-pointer" 
               onClick={() => takeToTargets(numberId, keyAreaGroup.key_area_id)}>
 
-                {/* Key Area Name */}
-                <h2 className="font-bold text-lg">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[0]}</h2>
-                <h3 className="text-sm">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[1]}</h3>
+                <div className='h-24 mb-4'>
+                  {/* Key Area Name */}
+                  <h2 className="font-bold text-lg">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[0]}</h2>
+                  <h3 className="text-sm">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[1]}</h3>
+                </div>
 
-                
+                <p>Some text underneath for reference</p>
+
               </div>
             ))}
           </div>
