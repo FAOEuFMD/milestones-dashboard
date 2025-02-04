@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Button from "../components/Button";
 import "../App.css";
 import axios from "axios";
 
@@ -76,7 +75,7 @@ const KeyAreas: React.FC = () => {
     } catch (error) {
       console.error('Error fetching data: ', error);
     }
-  }
+  };
 
   console.log(keyAreaData);
 
@@ -86,56 +85,48 @@ const KeyAreas: React.FC = () => {
     else if (numberId === 2) setTitle("Respond to Crises");
     else if (numberId === 3) setTitle("Control of Diseases");
     else setTitle("");
-  }
-
-
-  const handleButtonClick = () => {
-    // deleted the name param because everything was hardcoded we should use Irene's dynamic choosing once the DB data is correct
-
-    //This is the dynamic choosing of the url for the DBq uery
-    // navigate(`/keyarea/${name.toLowerCase().replace(/\s+/g, "")}`); => Irene put this in your CV
-
-    navigate("/KeyAreas/Targets");
   };
+
+  // Split Key Area name into two parts based on brackets to format separately
+  const formatKeyAreaName = (name: string): [string, string] => {
+    // Get indices of brackets
+    const openBracket = name.indexOf('[');
+    const closeBracket = name.indexOf(']');
+    // get part inside brackets and make all uppercase
+    const insideBracket = name.slice(openBracket + 1, closeBracket).toUpperCase().trim();
+    // get part after brackets
+    const outsideBracket = name.slice(closeBracket + 1).trim();
+    // return as an array
+    return [insideBracket, outsideBracket]
+  };
+
+  // Navigate to Targets for selected Key Area
+  const takeToTargets = (focusId: number, keyId: number) => navigate(`/focus-objective/${focusId}/key-area/${keyId}`);
 
   return (
     <div>
       <h1 className="page-heading">{title} Key Areas</h1>
 
       {keyAreaData.length > 0 && (
-        <>
-          
-        </>
+        <div className="container mx-auto w-full mt-7">
+          <div className="flex flew-wrap justify-center gap-4">
+
+            {/* Map through first array */}
+            {keyAreaData.map((keyAreaGroup) => (
+              <div key={keyAreaGroup.key_area_id} 
+              className="bg-white shadow-md rounded-md p-4 border border-gray-200 w-96 cursor-pointer" 
+              onClick={() => takeToTargets(numberId, keyAreaGroup.key_area_id)}>
+
+                {/* Key Area Name */}
+                <h2 className="font-bold text-lg">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[0]}</h2>
+                <h3 className="text-sm">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[1]}</h3>
+
+                
+              </div>
+            ))}
+          </div>
+        </div> 
       )}
-
-      <div className="flex flex-wrap">
-        {/* Expected Results Button */}
-        <div className="w-full md:w-1/3 p-4">
-          <Button
-            name="RISK MONITORING"
-            label="Ensure risk information are regularly collected, analyzed and available for risk managers in Member Nations and other countries"
-            onClick={() => handleButtonClick()}
-          />
-        </div>
-
-        {/* Indicators Button */}
-        <div className="w-full md:w-1/3 p-4">
-          <Button
-            name="RISK MITIGATION"
-            label="Enhance prevention, confidence of freedom, laboratory biosafety to increase protection against FAST diseases"
-            onClick={() => handleButtonClick()}
-          />
-        </div>
-
-        {/* Targets Button */}
-        <div className="w-full md:w-1/3 p-4">
-          <Button
-            name="CAPACITY DEVELOPMENT"
-            label="Improve skills for effective and efficient response to FAST incursion"
-            onClick={() => handleButtonClick()}
-          />
-        </div>
-      </div>
     </div>
   );
 };

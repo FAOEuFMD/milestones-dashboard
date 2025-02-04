@@ -1,6 +1,5 @@
 import React from "react"; //deleted Useeffect
 import { useState } from "react";
-import Button from "../components/Button";
 import TargetsTable from "../components/TargetsTable";
 // import PlotGraph from "../components/PlotGraph";
 
@@ -46,34 +45,9 @@ const Targets: React.FC<ExpectedResults> = () => {
         Ensure risk information are regularly collected, analyzed and available
         for risk managers in Member Nations and other countries{" "}
       </h3>{" "}
-      <div className="flex flex-wrap">
-        <div className="w-full md:w-1/3 p-4">
-          {/* This button labels have to be taken from the params to better query de DB */}
-          <Button
-            label="1.1FAST global surveillance sustained and viral intelligence up-scaled"
-            name="1-1" // here every button has the name tag corresponding the the expected results 1.1 since it's not possible to call 1.1 on the routes
-            onClick={handleButtonClick}
-          />
-        </div>
-
-        <div className="w-full md:w-1/3 p-4">
-          <Button
-            label="1.2 Enabled risk monitoring"
-            name="1-2"
-            onClick={handleButtonClick}
-          />
-        </div>
-
-        <div className="w-full md:w-1/3 p-4">
-          <Button
-            label="1.3 Enhanced FAST early warning"
-            name="1-3"
-            onClick={handleButtonClick}
-          />
-        </div>
+      
         {/* Here you ensure that selectedName has been updated and then pass the selectedName from the button property name to the compenent TargetsTable */}
         {showTable && selectedName && <TargetsTable dbQ={selectedName} />}
-      </div>
     </div>
   );
 };
