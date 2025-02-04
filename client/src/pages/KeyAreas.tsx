@@ -4,7 +4,7 @@ import "../App.css";
 import axios from "axios";
 import * as d3 from "d3";
 import {RowData, GroupedKeyArea} from "../types/interfaces.ts"
-import {formatKeyAreaName} from "./KeyAreasFunctions.ts"
+import {formatKeyAreaName, countMet} from "./KeyAreasFunctions.ts"
 
 // Type for url params
 type RouteParams = {
@@ -27,7 +27,7 @@ const KeyAreas: React.FC = () => {
 
   // Call functions on mount
     useEffect(() => {
-      if (numberId) keyAreaTitle(numberId);
+      keyAreaTitle();
       if (numberId) fetchData(numberId);
   }, [numberId]);
 
@@ -64,7 +64,7 @@ const KeyAreas: React.FC = () => {
   const takeToTargets = (focusId: number, keyId: number) => navigate(`/focus-objective/${focusId}/key-area/${keyId}`);
 
   // Set shortened title based on focus objective param
-  const keyAreaTitle = (numberId: number) => {
+  const keyAreaTitle = () => {
     if (numberId === 1) setTitle("Protection of Livestock");
     else if (numberId === 2) setTitle("Respond to Crises");
     else if (numberId === 3) setTitle("Control of Diseases");
@@ -85,13 +85,14 @@ const KeyAreas: React.FC = () => {
               className="bg-white shadow-md rounded-md p-4 border border-gray-200 w-96 cursor-pointer" 
               onClick={() => takeToTargets(numberId, keyAreaGroup.key_area_id)}>
 
-                <div className='h-24 mb-4'>
+                <div className='h-24 mb-1'>
                   {/* Key Area Name */}
                   <h2 className="font-bold text-lg">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[0]}</h2>
                   <h3 className="text-sm">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[1]}</h3>
                 </div>
 
-                <p>Some text underneath for reference</p>
+                {/* Targets Met */}
+                <p><span className="font-bold text-brightBlue text-lg">{countMet(keyAreaGroup.items)}</span> of <span className="font-bold text-brightBlue text-lg">{keyAreaGroup.items.length}</span> targets met</p>
 
               </div>
             ))}

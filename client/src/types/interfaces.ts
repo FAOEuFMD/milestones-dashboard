@@ -13,8 +13,10 @@
     target_timeframe: string;
   }
   
-  // Interface for data grouped by key area id
-  export interface GroupedKeyArea {
-    key_area_id: number;
-    items: RowData[];
-  }
+// Interface for data grouped by key area id
+export interface GroupedKeyArea {
+  key_area_id: number;
+  items: RowData[];
+}
+
+// 
