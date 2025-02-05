@@ -18,5 +18,3 @@ export interface GroupedKeyArea {
   key_area_id: number;
   items: RowData[];
 }
-
-// 

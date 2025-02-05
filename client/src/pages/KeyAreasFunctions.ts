@@ -61,8 +61,18 @@ export const groupByKeyArea = (data: RowData[]): GroupedKeyArea[] => {
     return [titleCaseInsideBracket, outsideBracket]
   };
 
-  // Calculate completed targets
-  export const countMet = (targets: RowData[]): number => {
+// Calculate completed targets
+export const countMet = (targets: RowData[]): number => {
     const met = targets.filter((target) => target.result_to_date === target.program_target);
     return met.length;
-  };
+};
+
+// Targets in progress
+export const countProgress = (targets: RowData[]): number => {
+    return targets.filter((target) => target.result_to_date > 0 && target.result_to_date < target.program_target).length;
+};   
+
+// Targets not started
+export const countNotStarted = (targets: RowData[]): number => {
+    return targets.filter((target) => target.result_to_date === 0 || target.result_to_date === null).length;
+}

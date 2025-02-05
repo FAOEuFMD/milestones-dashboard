@@ -63,7 +63,7 @@ const KeyAreas: React.FC = () => {
 
       {keyAreaData.length > 0 && (
         <div className="container mx-auto w-full mt-7">
-          <div className="flex flew-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
 
             {/* Map through first array */}
             {keyAreaData.map((keyAreaGroup) => (

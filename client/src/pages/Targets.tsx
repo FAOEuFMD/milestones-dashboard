@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 // import PlotGraph from "../components/PlotGraph";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import {RowData} from "../types/interfaces.ts"
-import {formatKeyAreaName} from "./KeyAreasFunctions.ts"
+import {RowData} from "../types/interfaces.ts";
+import {formatKeyAreaName, countMet, countProgress, countNotStarted} from "./KeyAreasFunctions.ts";
+import TargetsCard from "../components/TargetsCard.tsx";
 
 // Type for url params
 type TargetsRouteParams = {
@@ -44,8 +45,22 @@ const Targets: React.FC = () => {
     <div>
       {targetsData.length > 0 && (
         <>
+          {/* Title and Subtitle */}
           <h1 className="page-heading">{formatKeyAreaName(targetsData[0].key_area_name)[0]} Targets</h1>
           <h2 className="text-center">{formatKeyAreaName(targetsData[0].key_area_name)[1]}</h2>
+
+          <div className="container mx-auto w-full mt-7">
+            {/* Overview Cards */}
+            <div className="flex flex-wrap justify-center gap-8">
+              <TargetsCard label="targets total" color="text-lighterTeal" value={targetsData.length} />
+
+              <TargetsCard label="targets met" color="text-darkGreen" value={countMet(targetsData)} />
+
+              <TargetsCard label="in progress" color="text-brightBlue" value={countProgress(targetsData)} />
+
+              <TargetsCard label="not started" color="text-darkRed" value={countNotStarted(targetsData)} />
+            </div>
+          </div>
         </>
       )}
     </div>
