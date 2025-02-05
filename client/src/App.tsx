@@ -18,7 +18,7 @@ const App: React.FC = () => {
             {/* Display key areas based on chosen focus objective */}
             <Route path="/focus-objective/:focusObjectiveId" element={<KeyAreas />} />
             {/* Display targets based on chosen key area id */}
-            <Route path="/focus-objective/:focusObjectiveId/key-area/:keyAreaid" element={<Targets />}/>
+            <Route path="/focus-objective/:focusObjectiveId/key-area/:keyAreaId" element={<Targets />}/>
             <Route path="/plot" element={<PlotGraph />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
