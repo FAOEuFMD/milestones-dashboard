@@ -63,7 +63,7 @@ export const groupByKeyArea = (data: RowData[]): GroupedKeyArea[] => {
 
 // Calculate completed targets
 export const countMet = (targets: RowData[]): number => {
-    const met = targets.filter((target) => target.result_to_date === target.program_target);
+    const met = targets.filter((target) => target.result_to_date >= target.program_target);
     return met.length;
 };
 
