@@ -8,16 +8,13 @@ const calculateCompletion = (data: RowData[]) => {
     const total = data.length;
     const notMetCount = total - metCount;
 
-    // included check if total is greater than 0 just in case there are no targets by chance
-    const metPercentage = total > 0 ? ((metCount / total) * 100).toFixed(1) : 0;
-
     // return our calculations as an object
-    return { metPercentage, metCount, notMetCount, total }
+    return { metCount, notMetCount, total }
 };
 
 const MetDonut: React.FC<{data: RowData[]}> = ({ data }) => {
     // Get the calculations
-    const { metPercentage, metCount, notMetCount, total } = calculateCompletion(data);
+    const { metCount, notMetCount, total } = calculateCompletion(data);
 
     return (
         <Plot
@@ -36,8 +33,8 @@ const MetDonut: React.FC<{data: RowData[]}> = ({ data }) => {
                 },
             ]}
             layout={{
-                width: 250,
-                height: 250,
+                width: 200,
+                height: 200,
                 title: "",
                 showlegend: false,
                 // For adding text to the chart
@@ -57,14 +54,16 @@ const MetDonut: React.FC<{data: RowData[]}> = ({ data }) => {
                     },
                 ],
                 margin: {
-                    t: 20,
-                    b: 20,
-                    l: 20,
-                    r: 20,
-                }
+                    t: 0,
+                    b: 0,
+                    l: 0,
+                    r: 0,
+                },
             }}
-            // Chart will resize dynamically
-            config={{responsive: true}}
+            config={{
+                responsive: true,
+                displayModeBar: false,
+            }}
         />
     );
 };

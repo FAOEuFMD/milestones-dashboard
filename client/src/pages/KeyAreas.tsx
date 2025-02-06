@@ -3,8 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
 import {GroupedKeyArea} from "../types/interfaces.ts"
-import {groupByKeyArea, formatKeyAreaName, countMet} from "./KeyAreasFunctions.ts"
+import {groupByKeyArea, formatKeyAreaName} from "./KeyAreasFunctions.ts"
 import MetDonut from "../components/MetDonut.tsx";
+import TimeframeBarChart from "../components/TimeframeBarChart.tsx";
 
 // Type for url params
 type RouteParams = {
@@ -61,20 +62,25 @@ const KeyAreas: React.FC = () => {
 
       {keyAreaData.length > 0 && (
         <div className="container mx-auto w-full mt-7">
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-7">
 
             {/* Map through first array */}
             {keyAreaData.map((keyAreaGroup) => (
               <div key={keyAreaGroup.key_area_id} 
-              className="bg-white shadow-md rounded-md p-4 border border-gray-200 w-96 cursor-pointer overflow-hidden" 
+              className="bg-white shadow-md rounded-md p-4 border border-gray-200 w-80 cursor-pointer overflow-hidden" 
               onClick={() => takeToTargets(numberId, keyAreaGroup.key_area_id)}>
 
                 {/* Key Area Name */}
-                <h2 className="font-bold text-lg mb-5">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[0]}</h2>
+                <h2 className="font-bold text-xl text-center">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[0]}</h2>
 
                 {/* Donut chart */}
-                <div className="flex justify-center items-center w-full">
+                <div className="flex justify-center items-center w-full mt-7">
                   <MetDonut data={keyAreaGroup.items} />
+                </div>
+
+                {/* Bar chart */}
+                <div className="flex justify-center items-center w-full mt-7">
+                  <TimeframeBarChart data={keyAreaGroup.items} />
                 </div>
 
               </div>

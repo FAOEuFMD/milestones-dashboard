@@ -5,8 +5,6 @@ import Homepage from "./pages/Homepage";
 import Page404 from "./pages/Page404";
 import KeyAreas from "./pages/KeyAreas";
 import Targets from "./pages/Targets";
-import PlotGraph from "./components/PlotGraph";
-//patch I will navigate to the PlotGraph
 
 const App: React.FC = () => {
   return (
@@ -19,7 +17,6 @@ const App: React.FC = () => {
             <Route path="/focus-objective/:focusObjectiveId" element={<KeyAreas />} />
             {/* Display targets based on chosen key area id */}
             <Route path="/focus-objective/:focusObjectiveId/key-area/:keyAreaId" element={<Targets />}/>
-            <Route path="/plot" element={<PlotGraph />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
       </Router>
