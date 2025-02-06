@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
-import * as d3 from "d3";
+// import * as d3 from "d3";
 import {GroupedKeyArea} from "../types/interfaces.ts"
 import {groupByKeyArea, formatKeyAreaName, countMet} from "./KeyAreasFunctions.ts"
 
