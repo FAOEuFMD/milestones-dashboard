@@ -52,7 +52,7 @@ const Targets: React.FC = () => {
           <div className="container mx-auto w-full mt-7">
             {/* Overview Cards */}
             <div className="flex flex-wrap justify-center gap-8">
-              <TargetsCard label="targets total" color="text-lighterTeal" value={targetsData.length} />
+              <TargetsCard label="targets total" color="text-black" value={targetsData.length} />
 
               <TargetsCard label={countMet(targetsData) === 1 ? "target met" : "targets met"} color="text-darkGreen" value={countMet(targetsData)} />
 
