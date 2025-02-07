@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
-// import * as d3 from "d3";
 import {GroupedKeyArea} from "../types/interfaces.ts"
-import {groupByKeyArea, formatKeyAreaName, countMet} from "./KeyAreasFunctions.ts"
+import {groupByKeyArea, formatKeyAreaName} from "./KeyAreasFunctions.ts"
+import MetDonut from "../components/MetDonut.tsx";
+import TimeframeBarChart from "../components/TimeframeBarChart.tsx";
 
 // Type for url params
 type RouteParams = {
@@ -45,8 +46,6 @@ const KeyAreas: React.FC = () => {
     }
   };
 
-  console.log(keyAreaData);
-
   const takeToTargets = (focusId: number, keyId: number) => navigate(`/focus-objective/${focusId}/key-area/${keyId}`);
 
   // Set shortened title based on focus objective param
@@ -63,21 +62,27 @@ const KeyAreas: React.FC = () => {
 
       {keyAreaData.length > 0 && (
         <div className="container mx-auto w-full mt-7">
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-7">
 
             {/* Map through first array */}
             {keyAreaData.map((keyAreaGroup) => (
               <div key={keyAreaGroup.key_area_id} 
-              className="bg-white shadow-md rounded-md p-4 border border-gray-200 w-96 cursor-pointer" 
+              className="bg-white shadow-md rounded-md p-4 border border-gray-200 w-80 cursor-pointer overflow-hidden transform transition-transform duration-300 hover:shadow-lg hover:scale-105" 
               onClick={() => takeToTargets(numberId, keyAreaGroup.key_area_id)}>
 
                 {/* Key Area Name */}
-                <h2 className="font-bold text-lg mb-5">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[0]}</h2>
+                <h2 className="font-bold text-xl text-center">{formatKeyAreaName(keyAreaGroup.items[0].key_area_name)[0]}</h2>
 
-                <div className="text-center">
-                  {/* Targets Met */}
-                  <p><span className="text-brightBlue text-lg font-bold">{countMet(keyAreaGroup.items)}</span> of <span className="text-brightBlue text-lg font-bold">{keyAreaGroup.items.length}</span> targets met</p>
+                {/* Donut chart */}
+                <div className="flex justify-center items-center w-full mt-7">
+                  <MetDonut data={keyAreaGroup.items} />
                 </div>
+
+                {/* Bar chart */}
+                <div className="flex justify-center items-center w-full mt-7">
+                  <TimeframeBarChart data={keyAreaGroup.items} />
+                </div>
+
               </div>
             ))}
           </div>
