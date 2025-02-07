@@ -1,34 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Date, Integer, String, Text
+from sqlalchemy import create_engine, text, select
+from sqlalchemy.orm import relationship
 from config import db
 from config import app
 
 # Create the database engine using the imported URI
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
-
-def fetch_all_target_data():
-    query = text("""
-    SELECT
-        focus_objectives.id AS focus_objective_id,
-        focus_objectives.name AS focus_objective_name,
-        key_areas.id AS key_area_id,
-        key_areas.name AS key_area_name,
-        targets.target_id,
-        targets.indicator,
-        targets.target_description,
-        targets.result_to_date,
-        targets.program_target,
-        targets.expected_result
-    FROM focus_objectives
-    JOIN key_areas ON focus_objectives.id = key_areas.focus_objectives_id
-    JOIN targets ON key_areas.id = targets.key_area_id
-    """)
-    result = db.session.execute(query).fetchall()
-    colnames = ['focus_objective_id', 'focus_objective_name', 'key_area_id', 'key_area_name', 'target_id', 'indicator', 'target_description', 'result_to_date', 'program_target', 'expected_result']
-    return [dict(zip(colnames, row)) for row in result]
-
 
 class Targets(db.Model):
     __tablename__ = 'targets'
@@ -43,6 +20,7 @@ class Targets(db.Model):
     program_target = db.Column(db.Integer, nullable=True)
     target_timeframe = db.Column(db.String(50), nullable=True)
     timeframe_frequency = db.Column(db.String(50), nullable=True)
+    key_area = relationship("KeyAreas", foreign_keys=[key_area_id]) # Add relationship to KeyAreas
 
     def to_json(self):
         return {
@@ -60,27 +38,13 @@ class Targets(db.Model):
         }
 
 
-
-class FocusObjectives(db.Model):
-    __tablename__ = 'focus_objectives'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=True)
-    management = db.Column(db.String(255), nullable=True)
-
-    def to_json(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "management": self.management
-        }
-
-
 class KeyAreas(db.Model):
     __tablename__ = 'key_areas'
     id = db.Column(db.Integer, primary_key=True)
     focus_objectives_id = db.Column(db.Integer, db.ForeignKey('focus_objectives.id'), nullable=True)
     name = db.Column(db.String(255), nullable=False)
     management = db.Column(db.String(255), nullable=False)
+    focus_objective = relationship("FocusObjectives", foreign_keys=[focus_objectives_id] ) 
 
     def to_json(self):
         return {
@@ -88,6 +52,22 @@ class KeyAreas(db.Model):
             "focusObjectivesId": self.focus_objectives_id,
             "name": self.name,
             "management": self.management,
+        }
+
+
+
+class FocusObjectives(db.Model):
+    __tablename__ = 'focus_objectives'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=True)
+    management = db.Column(db.String(255), nullable=True)
+
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "management": self.management
         }
 
 

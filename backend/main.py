@@ -2,40 +2,76 @@ import sys
 import os
 sys.path.append(os.path.abspath('../'))
 from config import app, db
-from models import fetch_all_target_data
+from models import FocusObjectives, KeyAreas, Targets
 from flask import request, jsonify, Blueprint
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine, select, outerjoin
+from sqlalchemy.orm import aliased
 
-# There has to be a better way to do the models import
-from models import Targets, FocusObjectives, KeyAreas, Table121b, Table132c, Table311a, Table311b, Table321a, Table411a, Table421a, Table431a, Table512b, Table521a, Table521b, Table611a, Table611b, Table621a, Table621b, Table622a
+# Create the database engine using the imported URI
+engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
 
-# From Claire in Slack:
+KeyAreasAlias = aliased(KeyAreas)
+TargetsAlias = aliased(Targets)
+
+
+base_query = select(
+    FocusObjectives.id.label("focus_objective_id"),
+    FocusObjectives.name.label("focus_objective_name"),
+    KeyAreasAlias.id.label("key_area_id"),
+    KeyAreasAlias.name.label("key_area_name"),
+    TargetsAlias.target_id.label("target_id"),
+    TargetsAlias.indicator.label("indicator"),
+    TargetsAlias.target_description.label("target_description"),
+    TargetsAlias.result_to_date.label("result_to_date"),
+    TargetsAlias.program_target.label("program_target"),
+    TargetsAlias.expected_result.label("expected_result"),
+    TargetsAlias.target_timeframe.label("target_timeframe"),
+).select_from(FocusObjectives).join(
+    KeyAreasAlias,
+    KeyAreasAlias.focus_objectives_id == FocusObjectives.id
+).join(
+    TargetsAlias,
+    TargetsAlias.key_area_id == KeyAreasAlias.id
+)
+
+colnames = [
+    "focus_objective_id", "focus_objective_name", "key_area_id", "key_area_name",
+    "target_id", "indicator", "target_description", "result_to_date",
+    "program_target", "expected_result", "target_timeframe"
+]
+
+
+
 # route for fetching all data (router.get('/'...)
-# route for fetching data by dynamic focus objective (router.get('/:focusObjectiveId'...)
-# route for fetching data by dynamic focus objective AND key area (router.get('/:focusObjectiveId/:keyAreaId'...)
-
-# // Route for fetching all target data
-# router.get('/', async (req, res) => {
-#     try {
-#         const result = await fetchAllTargetData();
-#         console.log('Query result:', result);
-#         res.json(result);
-#     } catch (error) {
-#         console.error('Error retrieving targets', error);
-#         res.status(500).json({ message: 'Database query failed' });
-#     }
-# });
-
-
-
 @app.route("/", methods=["GET"] )
 def get_all_target_data():
     try:
-        result = fetch_all_target_data()
-        return jsonify(result)
+        result = db.session.execute(base_query).fetchall()
+        return jsonify([dict(zip(colnames, row)) for row in result])
     except Exception as error:
         print(f"Error retrieving targets: {error}")
         return jsonify({'message': 'Database query failed'}), 500
 
+
+# route for fetching data by focus objective id (router.get('/:focusObjectiveId'...)
+@app.route('/<int:focus_objective_id>', methods=["GET"])
+def get_target_data_by_focus_objective(focus_objective_id):
+
+    try:
+        query = base_query.where(FocusObjectives.id == focus_objective_id)
+        result = db.session.execute(query).fetchall()
+
+        if not result: 
+            return jsonify({'message': 'Focus Objective not found'}), 404
+        data = [dict(zip(colnames, row)) for row in result]
+        return jsonify(data)
+    except Exception as error:
+        print(f"Error retrieving focus objectives: {error}")
+        return jsonify({'message': 'Database query failed'}), 500
+
+
+# route for fetching data by focus objective AND key area (router.get('/:focusObjectiveId/:keyAreaId'...)
 
 
 
