@@ -67,7 +67,7 @@ const KeyAreas: React.FC = () => {
             {/* Map through first array */}
             {keyAreaData.map((keyAreaGroup) => (
               <div key={keyAreaGroup.key_area_id} 
-              className="bg-white shadow-md rounded-md p-4 border border-gray-200 w-80 cursor-pointer overflow-hidden" 
+              className="bg-white shadow-md rounded-md p-4 border border-gray-200 w-80 cursor-pointer overflow-hidden transform transition-transform duration-300 hover:shadow-lg hover:scale-105" 
               onClick={() => takeToTargets(numberId, keyAreaGroup.key_area_id)}>
 
                 {/* Key Area Name */}

@@ -5,35 +5,50 @@ import { countMet } from "../pages/KeyAreasFunctions";
 // function to calculate number of met goals for each category
 const findMetByTimeframe = (data: RowData[]) => {
     // group by timeframe
-    const shortTermMet = countMet(data.filter((target) => target.target_timeframe === "Short-term goal"));
-    const midTermMet = countMet(data.filter((target) => target.target_timeframe === "Mid-term goal"));
-    const longTermMet = countMet(data.filter((target) => target.target_timeframe === "Long-term goal"));
+    const shortTerm = data.filter((target) => target.target_timeframe === "Short-term goal");
+    const midTerm = data.filter((target) => target.target_timeframe === "Mid-term goal");
+    const longTerm = data.filter((target) => target.target_timeframe === "Long-term goal");
 
     // count met and return as an object
-    const timeframeMet = {
-        "Short-term": shortTermMet,
-        "Mid-term": midTermMet,
-        "Long-term": longTermMet
+    const timeframeCounts = {
+        shortTermMet: countMet(shortTerm),
+        midTermMet: countMet(midTerm),
+        longtermMet: countMet(longTerm),
+        shortTermUnmet: shortTerm.length - countMet(shortTerm),
+        midTermUnmet: midTerm.length - countMet(midTerm),
+        longTermUnmet: longTerm.length - countMet(longTerm)
     }
-    // return our calculations as an object
-    return timeframeMet;
+
+    // return our calculations
+    return timeframeCounts;
 };
 
 const TimeframeBarChart: React.FC<{data: RowData[]}> = ({ data }) => {
     // Get the calculations
-    const goalCounts = findMetByTimeframe(data);
+    const { shortTermMet, midTermMet, longtermMet, shortTermUnmet, midTermUnmet, longTermUnmet } = findMetByTimeframe(data);
 
     return (
         <Plot
             data={[
+                // Met goals
                 {
                     type: "bar",
-                    x: Object.values(goalCounts),
-                    y: Object.keys(goalCounts),
+                    x: [shortTermMet, midTermMet, longtermMet],
+                    y: ["Short-term", "Mid-term", "Long-term"],
                     orientation: "h",
+                    name: "Met Goals",
                     marker: {
-                        color: ["#018877", "#629978", "#28949C"]
+                        color: "#048B5D"
                     },
+                },
+                // Unmet goals
+                {
+                    type:"bar",
+                    x: [shortTermUnmet, midTermUnmet, longTermUnmet],
+                    y: ["Short-term", "Mid-term", "Long-term"],
+                    name: "Unmet Goals",
+                    orientation: "h",
+                    marker: {color: "#9ea6a1"}
                 },
             ]}
             layout={{
@@ -47,6 +62,7 @@ const TimeframeBarChart: React.FC<{data: RowData[]}> = ({ data }) => {
                         family: "Helvetica, Arial, sans-serif",
                     }
                 },
+                barmode: "stack",
                 showlegend: false,
                 xaxis: {
                     title: {
@@ -57,18 +73,21 @@ const TimeframeBarChart: React.FC<{data: RowData[]}> = ({ data }) => {
                         },
                     },
                     dtick: 1,
+                    tickfont: {
+                        size: 8,
+                    }
                 },       
                 yaxis: {
                     tickfont: {
                         color: "black",
                         family: "Helvetica, Arial, sans-serif",
-                    }
+                    },
                 },
                 margin: {
                     t: 40, // Reduce top margin to bring the title closer to the chart
-                    b: 30, // Set bottom margin if necessary (for axis labels)
+                    b: 40, // Set bottom margin if necessary (for axis labels)
                     l: 75, // Left margin for proper label spacing
-                    r: 25, // Right margin for proper label spacing
+                    r: 15, // Right margin for proper label spacing
                 },
             }}
             config={{
