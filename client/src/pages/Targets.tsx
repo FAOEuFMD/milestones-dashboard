@@ -24,10 +24,12 @@ const Targets: React.FC = () => {
   const focusNumberId = Number(focusObjectiveId);
   const keyNumberId = Number(keyAreaId);
 
+  // API variable so it can render locally or onrender
+  const API_URL = import.meta.env.VITE_API_URL || "https://milestones-dashboard-staging.onrender.com";
   // Get data filtered by focus objective and key area
   const fetchTargetsData = async (focusId: number, keyId: number) => {
     try {
-      const response = await axios.get(`/api/targets/focus_objective/${focusId}/key_area/${keyId}`);
+      const response = await axios.get(`${API_URL}/api/targets/focus_objective/${focusId}/key_area/${keyId}`);
       setTargetsData(response.data);
     } catch (error) {
       console.error('Error fetching data: ', error);
