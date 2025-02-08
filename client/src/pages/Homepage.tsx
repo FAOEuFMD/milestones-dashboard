@@ -18,6 +18,7 @@ interface RawFocusObjective {
 }
 
 const Homepage: React.FC = () => {
+
   // State for Focus Objective data
   const [focus, setFocus] = useState<FocusObjective[]>([]);
   const navigate = useNavigate();
@@ -27,10 +28,13 @@ const Homepage: React.FC = () => {
     getFocus();
   }, []);
 
+  // API variable so it can render locally or onrender
+  const API_URL = import.meta.env.VITE_API_URL || "https://milestones-dashboard-staging.onrender.com";
+
   // Call API for Focus Objective data
   const getFocus = async () => {
     try {
-      const results = await fetch('/api/targets', {
+      const results = await fetch(`${API_URL}/api/targets`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
       });
