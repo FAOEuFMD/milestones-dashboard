@@ -3,9 +3,8 @@ import os
 sys.path.append(os.path.abspath('../'))
 from config import app, db
 from models import FocusObjectives, KeyAreas, Targets
-from flask import request, jsonify, Blueprint
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, select, outerjoin
+from flask import jsonify
+from sqlalchemy import create_engine, select
 from sqlalchemy.orm import aliased
 
 # Create the database engine using the imported URI
@@ -43,9 +42,9 @@ colnames = [
 
 
 
-# route for fetching all data (router.get('/'...)
+# route for fetching all data
 @app.route("/", methods=["GET"] )
-def get_all_target_data():
+def get_all_data():
     try:
         result = db.session.execute(base_query).fetchall()
         return jsonify([dict(zip(colnames, row)) for row in result])
@@ -54,9 +53,9 @@ def get_all_target_data():
         return jsonify({'message': 'Database query failed'}), 500
 
 
-# route for fetching data by focus objective id (router.get('/:focusObjectiveId'...)
+# route for fetching data by focus objective id
 @app.route('/<int:focus_objective_id>', methods=["GET"])
-def get_target_data_by_focus_objective(focus_objective_id):
+def get_data_by_focus_objective(focus_objective_id):
 
     try:
         query = base_query.where(FocusObjectives.id == focus_objective_id)
@@ -71,8 +70,22 @@ def get_target_data_by_focus_objective(focus_objective_id):
         return jsonify({'message': 'Database query failed'}), 500
 
 
-# route for fetching data by focus objective AND key area (router.get('/:focusObjectiveId/:keyAreaId'...)
+# route for fetching data by focus objective AND key area
+@app.route('/<int:focus_objective_id>/<int:key_area_id>', methods=["GET"])
+def get_data_by_key_area(focus_objective_id, key_area_id):
 
+    try:
+        query = base_query.where(FocusObjectives.id == focus_objective_id)
+        query = query.where(KeyAreasAlias.id == key_area_id)
+        result = db.session.execute(query).fetchall()
+
+        if not result: 
+            return jsonify({'message': 'Focus Objective not found'}), 404
+        data = [dict(zip(colnames, row)) for row in result]
+        return jsonify(data)
+    except Exception as error:
+        print(f"Error retrieving focus objectives: {error}")
+        return jsonify({'message': 'Database query failed'}), 500
 
 
 if __name__ == "__main__":
