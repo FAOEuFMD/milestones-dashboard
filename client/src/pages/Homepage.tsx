@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import InfoButton from "../components/InfoButton";
 import Footer from "../components/Footer";
 import { useEffect, useState } from 'react';
+import { API_URL } from "./APIFunctions";
 
 interface FocusObjective {
   id: number;
@@ -27,9 +28,6 @@ const Homepage: React.FC = () => {
   useEffect(() => {
     getFocus();
   }, []);
-
-  // API variable so it can render locally or onrender
-  const API_URL = import.meta.env.VITE_API_URL || "https://milestones-dashboard-staging.onrender.com";
 
   // Call API for Focus Objective data
   const getFocus = async () => {

@@ -6,6 +6,7 @@ import {GroupedKeyArea} from "../types/interfaces.ts"
 import {groupByKeyArea, formatKeyAreaName} from "./KeyAreasFunctions.ts"
 import MetDonut from "../components/MetDonut.tsx";
 import TimeframeBarChart from "../components/TimeframeBarChart.tsx";
+import { API_URL } from "./APIFunctions";
 
 // Type for url params
 type RouteParams = {
@@ -32,8 +33,6 @@ const KeyAreas: React.FC = () => {
       if (numberId) fetchData(numberId);
   }, [numberId]);
 
-  // API variable so it can render locally or onrender
-  const API_URL = import.meta.env.VITE_API_URL || "https://milestones-dashboard-staging.onrender.com";
   // Get data filtered by focus objective
   const fetchData = async (id: number) => {
     try {

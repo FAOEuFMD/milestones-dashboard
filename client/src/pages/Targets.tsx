@@ -7,6 +7,7 @@ import axios from "axios";
 import {RowData} from "../types/interfaces.ts";
 import {formatKeyAreaName, countMet, countProgress, countNotStarted} from "./KeyAreasFunctions.ts";
 import TargetsCard from "../components/TargetsCard.tsx";
+import { API_URL } from "./APIFunctions";
 
 // Type for url params
 type TargetsRouteParams = {
@@ -24,8 +25,6 @@ const Targets: React.FC = () => {
   const focusNumberId = Number(focusObjectiveId);
   const keyNumberId = Number(keyAreaId);
 
-  // API variable so it can render locally or onrender
-  const API_URL = import.meta.env.VITE_API_URL || "https://milestones-dashboard-staging.onrender.com";
   // Get data filtered by focus objective and key area
   const fetchTargetsData = async (focusId: number, keyId: number) => {
     try {
