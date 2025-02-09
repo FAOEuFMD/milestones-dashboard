@@ -28,7 +28,7 @@ const MetDonut: React.FC<{data: RowData[]}> = ({ data }) => {
                     // Hide default percentages
                     textinfo: "none",
                     marker: {
-                        colors: ["#048B5D", "#9ea6a1"]
+                        colors: ["#048B5D", "#9ea6a1B3"]
                     },
                 },
             ]}

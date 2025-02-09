@@ -48,7 +48,7 @@ const TimeframeBarChart: React.FC<{data: RowData[]}> = ({ data }) => {
                     y: ["Short-term", "Mid-term", "Long-term"],
                     name: "Unmet Goals",
                     orientation: "h",
-                    marker: {color: "#9ea6a1"}
+                    marker: {color: "#9ea6a1B3"}
                 },
             ]}
             layout={{

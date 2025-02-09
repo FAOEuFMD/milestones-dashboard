@@ -1,13 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import TargetsTable from "../components/TargetsTable";
-// import PlotGraph from "../components/PlotGraph";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import {RowData} from "../types/interfaces.ts";
 import {formatKeyAreaName, countMet, countProgress, countNotStarted} from "./KeyAreasFunctions.ts";
 import TargetsCard from "../components/TargetsCard.tsx";
 import { API_URL } from "./APIFunctions";
+import TargetsTable from "../components/TargetsTable.tsx";
 
 // Type for url params
 type TargetsRouteParams = {
@@ -40,8 +39,6 @@ const Targets: React.FC = () => {
     fetchTargetsData(focusNumberId, keyNumberId);
   }, []);
 
-  console.log(targetsData);
-
   return (
     <div>
       {targetsData.length > 0 && (
@@ -61,6 +58,11 @@ const Targets: React.FC = () => {
 
               <TargetsCard label="not started" color="text-darkRed" value={countNotStarted(targetsData)} />
             </div>
+          </div>
+
+          {/* Table */}
+          <div>
+            <TargetsTable data={targetsData} />
           </div>
         </>
       )}
