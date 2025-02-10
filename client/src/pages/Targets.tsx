@@ -53,10 +53,8 @@ const Targets: React.FC = () => {
   // apply filters based on checked boxes, else send all the data
   const filteredData = filters.length ? targetsData.filter((target) => filters.includes(target.target_timeframe)) : targetsData;
 
+  // Create filter categories for goal length
   const goalLength = ["Short-term goal", "Mid-term goal", "Long-term goal"]
-
-  console.log("Filters:", filters);
-  console.log("Targets:", targetsData.map(target => target.target_timeframe));
 
   return (
     <div>
@@ -79,24 +77,36 @@ const Targets: React.FC = () => {
             </div>
           </div>
 
-          {/* Filters */}
-          <div>
-            {goalLength.map((goalType) => (
-              <label key={goalType}>
-                <input
-                  type="checkbox" 
-                  value={goalType} 
-                  checked={filters.includes(goalType)} 
-                  onChange={() => handleFilterCheck(goalType)}
-                />
-                {goalType}
-              </label>
-            ))}
-          </div>
+          <div className="mt-9 grid grid-cols-[1fr_5fr] gap-4">
+            {/* Filters */}
+            <div className="mx-auto w-full bg-white shadow-md rounded-md px-7 py-5 border border-gray-200">
+              <h2 className="font-bold text-2xl text-darkTeal px-3">Filters</h2>
 
-          {/* Table */}
-          <div className="container mx-auto w-full mt-9 bg-white shadow-md rounded-md p-4 border border-gray-200">
-            <TargetsTable data={filteredData} />
+              <div>
+                <h3 className="p-3 text-left text-lg font-bold">Goal Length</h3>
+                {/* Stack checkboxes with space */}
+                <div className="flex flex-col gap-2 px-3">
+                  {goalLength.map((goalType) => (
+                    <label key={goalType} className="flex items-center gap-2">
+                      <input
+                        type="checkbox" 
+                        value={goalType} 
+                        checked={filters.includes(goalType)} 
+                        onChange={() => handleFilterCheck(goalType)} 
+                        className="w-4 h-4 accent-greyGreen"
+                      />
+                      {goalType}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Table */}
+            <div className="mx-auto w-full bg-white shadow-md rounded-md pl-7 pr-10 pt-5 pb-10 border border-gray-200">
+              <h2 className="font-bold text-2xl text-darkTeal px-3">Targets</h2>
+              <TargetsTable data={filteredData} />
+            </div>
           </div>
         </>
       )}
