@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-table";
 import {RowData} from "../types/interfaces.ts";
 import ProgressChart from "./ProgressChart.tsx";
+import {useMemo} from "react";
 
 interface TargetsTableProps {
   data: RowData[];
@@ -13,7 +14,7 @@ interface TargetsTableProps {
 
 const TargetsTable: React.FC<TargetsTableProps> = ({ data }) => {
 
-  const columns: ColumnDef<RowData, any>[] = [
+  const columns: ColumnDef<RowData, any>[] = useMemo(() => [
     {
       accessorKey: "expected_result",
       header: "Expected Result"
@@ -38,12 +39,12 @@ const TargetsTable: React.FC<TargetsTableProps> = ({ data }) => {
               result_to_date={resultToDate}
               program_target={programTarget}
             />
-            <p className="text-center text-sm">{resultToDate} of {programTarget}</p>
+            <p className="text-center text-sm mb-1">{resultToDate} of {programTarget}</p>
           </div>
         );
       },
     },
-  ];
+  ], []);
 
   // Count occurences of each expected_result so we can merge their cells later
   // Create empty object

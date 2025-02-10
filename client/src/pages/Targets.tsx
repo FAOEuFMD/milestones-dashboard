@@ -18,6 +18,8 @@ type TargetsRouteParams = {
 const Targets: React.FC = () => {
   
   const [targetsData, setTargetsData] = useState<RowData[]>([]);
+  // State for filters
+  const [filters, setFilters] = useState<string[]>([]);
 
   // Get focus objective and key area id from params
   const { focusObjectiveId, keyAreaId } = useParams<TargetsRouteParams>();
@@ -39,7 +41,22 @@ const Targets: React.FC = () => {
     fetchTargetsData(focusNumberId, keyNumberId);
   }, []);
 
-  console.log(targetsData);
+  // handle checkbox selections
+  const handleFilterCheck = (category: string) => {
+    setFilters((prevState) => 
+      prevState.includes(category)
+        ? prevState.filter((f) => f !== category) // uncheck category if already checked
+        : [...prevState, category] // add category if not previously checked
+    );
+  };
+
+  // apply filters based on checked boxes, else send all the data
+  const filteredData = filters.length ? targetsData.filter((target) => filters.includes(target.target_timeframe)) : targetsData;
+
+  const goalLength = ["Short-term goal", "Mid-term goal", "Long-term goal"]
+
+  console.log("Filters:", filters);
+  console.log("Targets:", targetsData.map(target => target.target_timeframe));
 
   return (
     <div>
@@ -62,9 +79,24 @@ const Targets: React.FC = () => {
             </div>
           </div>
 
+          {/* Filters */}
+          <div>
+            {goalLength.map((goalType) => (
+              <label key={goalType}>
+                <input
+                  type="checkbox" 
+                  value={goalType} 
+                  checked={filters.includes(goalType)} 
+                  onChange={() => handleFilterCheck(goalType)}
+                />
+                {goalType}
+              </label>
+            ))}
+          </div>
+
           {/* Table */}
           <div className="container mx-auto w-full mt-9 bg-white shadow-md rounded-md p-4 border border-gray-200">
-            <TargetsTable data={targetsData} />
+            <TargetsTable data={filteredData} />
           </div>
         </>
       )}

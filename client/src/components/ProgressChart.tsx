@@ -22,7 +22,7 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ result_to_date, program_t
                     orientation: "h",
                     x: [result_to_date], // progress
                     y: [""], // empty label to align bars
-                    name: "Result to date",
+                    name: "Current",
                     marker: {color: progressColor}
                 },
                 {
@@ -30,7 +30,7 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ result_to_date, program_t
                     orientation: "h",
                     x: [remainingTarget], // left to go
                     y: [""], // empty label to align bars
-                    name: "Remaining Target",
+                    name: "Remaining",
                     marker: {color: "#9ea6a1B3"}
                 },  
             ]}
@@ -38,7 +38,7 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ result_to_date, program_t
                 barmode: "stack",
                 height: 20,
                 width: 175,
-                margin: { l: 0, r: 0, t: 10, b: 0 },
+                margin: { l: 5, r: 0, t: 10, b: 0 },
                 showlegend: false,
                 xaxis: { visible: false },
                 yaxis: { visible: false },
