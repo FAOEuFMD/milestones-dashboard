@@ -76,3 +76,13 @@ export const countProgress = (targets: RowData[]): number => {
 export const countNotStarted = (targets: RowData[]): number => {
     return targets.filter((target) => target.result_to_date === 0 || target.result_to_date === null).length;
 }
+
+export const calculateStatus = (resultToDate: number, programTarget: number): string => {
+    if (resultToDate >= programTarget) {
+        return 'Met';
+      } else if (resultToDate > 0) {
+        return 'In progress';
+      } else {
+        return 'Not started';
+    }
+};

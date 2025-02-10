@@ -1,124 +1,124 @@
-import { useEffect, useState } from "react";
-
-interface TableData {
-  key_area_id: string;
-  indicator: string;
-  target_description: string;
-  result_to_date: string;
-  program_target: string;
-}
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import {RowData} from "../types/interfaces.ts";
+import ProgressChart from "./ProgressChart.tsx";
+import {useMemo} from "react";
 
 interface TargetsTableProps {
-  dbQ: string; // Add dbQ to the props interface so we have defined it as a prop
+  data: RowData[];
 }
-//here we pass the dbQ so that Targets table so that the table makes the call with the name from the button. we have to specify the props in the <> after React.FC
-const TargetsTable: React.FC<TargetsTableProps> = ({ dbQ }) => {
-  const [data, setData] = useState<TableData[]>([]);
 
-  const fetchData = async () => {
-    try {
-      console.log(`Fetching data from /targets/keyarea1/expectedresult/${dbQ}`);
-      const response = await fetch(
-        `http://localhost:5000/api/targets/keyarea1/expectedresult/${dbQ}`
-      );
-      const result = await response.json();
-      // Transform data as needed
-      const transformedData = result.map((item: any) => ({
-        key_area_id: item.key_area_id,
-        indicator: item.indicator,
-        target_description: item.target_description || "",
-        result_to_date: item.result_to_date || "",
-        program_target: item.program_target || "",
-      }));
-      setData(transformedData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+const TargetsTable: React.FC<TargetsTableProps> = ({ data }) => {
 
-  useEffect(() => {
-    fetchData();
-  }, [data]);
+  const columns: ColumnDef<RowData, any>[] = useMemo(() => [
+    {
+      accessorKey: "expected_result",
+      header: "Expected Result"
+    },
+    {
+      accessorKey: "indicator",
+      header: "Indicator",
+    },
+    {
+      accessorKey: "target_description",
+      header: "Target description",
+    },
+    {
+      accessorKey: "progress",
+      header: "Progress",
+      cell: ({row}) => {
+        const resultToDate = row.original.result_to_date ?? 0; // check if result to date is null
+        const programTarget = row.original.program_target ?? 0;
+        return (
+          <div>
+            <ProgressChart
+              result_to_date={resultToDate}
+              program_target={programTarget}
+            />
+            <p className="text-center text-sm mb-1">{resultToDate} of {programTarget}</p>
+          </div>
+        );
+      },
+    },
+  ], []);
+
+  // Count occurences of each expected_result so we can merge their cells later
+  // Create empty object
+  let expectedResultRowSpans: Record<string, number> ={};
+
+  data.forEach((row) => {
+    // if expected result already exists in the object, increment count, else initialize count to 1
+    if (expectedResultRowSpans[row.expected_result]) expectedResultRowSpans[row.expected_result] += 1;
+    else expectedResultRowSpans[row.expected_result] = 1;
+  });
+
+  // create set to keep track of which expected_result values have been rendered (Set eliminates duplicates)
+  let seenExpectedResults = new Set<string>();
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
 
   return (
-    <div className="container mx-auto p-4" style={{ maxWidth: "1300px" }}>
-      <table className="min-w-full bg-white border border-gray-200">
-        <thead>
-          <tr>
-            <th
-              className="py-2 px-4 border-b border-l border-r"
-              style={{
-                width: "150px",
-                textAlign: "center",
-                backgroundImage: "linear-gradient(to bottom, #34C759, #2E865F)",
-                backgroundClip: "padding-box",
-                color: "white",
-              }}
-            >
-              Indicator
-            </th>
-            <th
-              className="py-2 px-4 border-b border-l border-r"
-              style={{
-                width: "200px",
-                textAlign: "center",
-                backgroundImage: "linear-gradient(to bottom, #34C759, #2E865F)",
-                backgroundClip: "padding-box",
-                color: "white",
-              }}
-            >
-              Target Description
-            </th>
-            <th
-              className="py-2 px-4 border-b border-l border-r"
-              style={{
-                width: "100px",
-                backgroundImage: "linear-gradient(to bottom, #34C759, #2E865F)",
-                backgroundClip: "padding-box",
-                color: "white",
-              }}
-            >
-              Result to Date
-            </th>
-            <th
-              className="py-2 px-4 border-b border-l border-r"
-              style={{
-                width: "100px",
-                backgroundImage: "linear-gradient(to bottom, #34C759, #2E865F)",
-                backgroundClip: "padding-box",
-                color: "white",
-              }}
-            >
-              Program Target
-            </th>
+    <table>
+      <thead className="whitespace-nowrap">
+        {/* Map through array of header groups (need for grouping by expected result later) */}
+        {table.getHeaderGroups().map((headerGroup) =>(
+          <tr key={headerGroup.id} className="border-b-4 border-lighterTeal">
+            {/* Map through the headers in each headerGroup; headerGroup.id and header.id are auto-generated by React Table */}
+            {headerGroup.headers.map((header) => (
+              <th key={header.id} className="p-3 text-left text-lg font-bold">
+                {/* @ts-expect-error TypeScript is misinterpreting the type of header.column.columnDef.header as bigint even though they log as strings not matter what i do */}
+                {flexRender(header.column.columnDef.header, header.getContext())}
+              </th>
+            ))}
           </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <tr key={index}>
-              <td
-                className="py-2 px-4 border-b border-l border-r"
-                style={{ textAlign: "left" }}
-              >
-                {row.indicator}
-              </td>
-              <td
-                className="py-2 px-4 border-b border-l border-r"
-                style={{ textAlign: "left" }}
-              >
-                {row.target_description}
-              </td>
-              <td className="py-2 px-4 border-b border-l border-r">
-                {row.result_to_date}
-              </td>
-              <td className="py-2 px-4 border-b border-l border-r">
-                {row.program_target}
-              </td>
+        ))}
+      </thead>
+      
+      <tbody>
+        {/* Get an array of rows and map through them */}
+        {table.getRowModel().rows.map((row) => {
+          // Extract expected_result from current row
+          const expectedResult = row.original.expected_result;
+          // check if this expected_result has already been rendered
+          const isFirstOccurrence = !seenExpectedResults.has(expectedResult);
+
+          // If this is the first occurence, add expected_result to seen set
+          if (isFirstOccurrence) seenExpectedResults.add(expectedResult);
+          
+          return (
+            <tr key={row.id} className="border-b border-lighterTeal">
+              {/* Merge "Expected Result" cells using rowSpan (set rowSpan to the number of times expected_result appears from expectedResultRowSpans so that's how many rows it takes up) */}
+              {isFirstOccurrence && (
+                <td rowSpan={expectedResultRowSpans[expectedResult]} className="p-3">
+                  {row.original.expected_result}
+                </td>
+              )}
+
+              {/* Rend columns other than Expected Result as normal*/}
+              {row.getVisibleCells().map((cell) => {
+                // skip rendering duplicate expected_results
+                if (cell.column.id === "expected_result") return null; 
+                return (
+                  <td key={cell.id} className="p-3">
+                    {/* @ts-expect-error Same Typescript error as above */}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                );
+              })}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+          );
+        })}
+      </tbody>
+    </table>
+  )
+}
+
 export default TargetsTable;
