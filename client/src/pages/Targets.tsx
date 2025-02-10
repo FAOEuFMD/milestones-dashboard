@@ -61,7 +61,7 @@ const Targets: React.FC = () => {
           </div>
 
           {/* Table */}
-          <div>
+          <div className="container mx-auto w-full mt-9 bg-white shadow-md rounded-md p-4 border border-gray-200">
             <TargetsTable data={targetsData} />
           </div>
         </>
