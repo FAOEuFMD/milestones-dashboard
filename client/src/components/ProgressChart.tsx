@@ -6,8 +6,13 @@ interface ProgressChartProps {
 }
 
 const ProgressChart: React.FC<ProgressChartProps> = ({ result_to_date, program_target }) => {
-    // compute remaining target
-    const remainingTarget = program_target - result_to_date;
+    // compute remaining target; make sure it's not negative or bar looks odd
+    const remainingTarget = Math.max(program_target - result_to_date, 0);
+
+    // bar color based on progress; default is grey
+    let progressColor = "#9ea6a1B3";
+    if (result_to_date >= program_target) progressColor = "#048B5D";
+    else if (result_to_date > 0) progressColor = "#28949C"; 
 
     return (
         <Plot
@@ -18,7 +23,7 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ result_to_date, program_t
                     x: [result_to_date], // progress
                     y: [""], // empty label to align bars
                     name: "Result to date",
-                    marker: {color: "#048B5D"}
+                    marker: {color: progressColor}
                 },
                 {
                     type: "bar",

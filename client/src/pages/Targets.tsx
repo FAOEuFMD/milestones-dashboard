@@ -39,6 +39,8 @@ const Targets: React.FC = () => {
     fetchTargetsData(focusNumberId, keyNumberId);
   }, []);
 
+  console.log(targetsData);
+
   return (
     <div>
       {targetsData.length > 0 && (
