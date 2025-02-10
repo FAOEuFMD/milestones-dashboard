@@ -36,9 +36,9 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ result_to_date, program_t
             ]}
             layout={{
                 barmode: "stack",
-                height: 30,
-                width: 200,
-                margin: { l: 10, r: 10, t: 10, b: 10 },
+                height: 20,
+                width: 175,
+                margin: { l: 0, r: 0, t: 10, b: 0 },
                 showlegend: false,
                 xaxis: { visible: false },
                 yaxis: { visible: false },
