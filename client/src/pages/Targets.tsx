@@ -7,6 +7,7 @@ import {formatKeyAreaName, countMet, countProgress, countNotStarted, calculateSt
 import TargetsCard from "../components/TargetsCard.tsx";
 import { API_URL } from "./APIFunctions";
 import TargetsTable from "../components/TargetsTable.tsx";
+import Filters from "../components/Filters.tsx";
 
 // Type for url params
 type TargetsRouteParams = {
@@ -19,7 +20,7 @@ const Targets: React.FC = () => {
   
   const [targetsData, setTargetsData] = useState<RowData[]>([]);
   // State for timeframe filters
-  const [filters, setFilters] = useState<string[]>([]);
+  const [timeframeFilters, setTimeframeFilters] = useState<string[]>([]);
   const [statusFilters, setStatusFilters] = useState<string[]>([]);
 
   // Get focus objective and key area id from params
@@ -42,27 +43,31 @@ const Targets: React.FC = () => {
     fetchTargetsData(focusNumberId, keyNumberId);
   }, []);
 
-  // handle checkbox selections for timeframe
-  const handleFilterCheck = (category: string) => {
-    setFilters((prevState) => 
-      prevState.includes(category)
-        ? prevState.filter((f) => f !== category) // uncheck category if already checked
-        : [...prevState, category] // add category if not previously checked
-    );
-  };
-
-  // handle checkbox selections for status filtering
-  const handleStatusFilterCheck = (status: string) => {
-    setStatusFilters((prevState) =>
-      prevState.includes(status) ? prevState.filter((f) => f !== status) : [...prevState, status]
-    );
-  };
+  // Filters can easily be added to if we think of more
+  const handleFilterChange = (filterType: "timeframe" | "status", value: string) => {
+    console.log("handleFilterChange called with:");
+  console.log("filterType:", filterType);  // Logs 'timeframe' or 'status'
+  console.log("value:", value);            // Logs the selected value (goalType or category)
+    if (filterType === 'timeframe') {
+      setTimeframeFilters((prevState) =>
+      prevState.includes(value)
+        ? prevState.filter((item) => item !== value) // uncheck category if already checked
+        : [...prevState, value] // add category if not previously checked
+      );
+    } else if (filterType === 'status') {
+      setStatusFilters((prevState) =>
+      prevState.includes(value)
+        ? prevState.filter((item) => item !== value) // uncheck category if already checked
+        : [...prevState, value] // add category if not previously checked
+      );
+    };
+  }
 
   // apply filters based on checked boxes, else send all the data
-  const filteredData = filters.length || statusFilters.length 
+  const filteredData = timeframeFilters.length || statusFilters.length 
     ? targetsData.filter((target) => {
       const status = calculateStatus(target.result_to_date, target.program_target);
-      const matchesGoalLength = filters.length ? filters.includes(target.target_timeframe) : true;
+      const matchesGoalLength = timeframeFilters.length ? timeframeFilters.includes(target.target_timeframe) : true;
       const matchesStatus = statusFilters.length ? statusFilters.includes(status) : true;
       return matchesGoalLength && matchesStatus;
     })
@@ -101,39 +106,21 @@ const Targets: React.FC = () => {
               {/* Status Filter */}
               <div>
                   <h3 className="p-3 text-left text-lg font-bold">Status</h3>
-                  <div className="flex flex-col gap-2 px-3 mb-4">
-                    {goalStatus.map((status) => (
-                      <label key={status} className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          value={status}
-                          checked={statusFilters.includes(status)}
-                          onChange={() => handleStatusFilterCheck(status)}
-                          className="w-4 h-4 accent-greyGreen"
-                        />
-                        {status}
-                      </label>
-                    ))}
-                  </div>
-                </div>
+                    <Filters
+                      categories={goalStatus} 
+                      selectedCategories={statusFilters} 
+                      filter='status'
+                      handleFilterChange={(filter, value) => handleFilterChange(filter, value)}/>
+              </div>
 
+              {/* Timeframe Filter */}
               <div>
-                <h3 className="p-3 text-left text-lg font-bold">Goal Length</h3>
-                {/* Stack checkboxes with space */}
-                <div className="flex flex-col gap-2 px-3">
-                  {goalLength.map((goalType) => (
-                    <label key={goalType} className="flex items-center gap-2">
-                      <input
-                        type="checkbox" 
-                        value={goalType} 
-                        checked={filters.includes(goalType)} 
-                        onChange={() => handleFilterCheck(goalType)} 
-                        className="w-4 h-4 accent-greyGreen"
-                      />
-                      {goalType}
-                    </label>
-                  ))}
-                </div>
+                  <h3 className="p-3 text-left text-lg font-bold">Goal Length</h3>
+                    <Filters
+                      categories={goalLength} 
+                      selectedCategories={timeframeFilters} 
+                      filter='timeframe'
+                      handleFilterChange={(filter, value) => handleFilterChange(filter, value)}/>
               </div>
             </div>
 
