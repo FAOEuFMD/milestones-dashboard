@@ -1,6 +1,7 @@
 import Plot from "react-plotly.js";
 import { RowData } from "../types/interfaces";
 import { countMet } from "../pages/KeyAreasFunctions";
+import React, { useEffect, useState } from 'react';
 
 // function to calculate number of met goals for each category
 const findMetByTimeframe = (data: RowData[]) => {
@@ -24,9 +25,26 @@ const findMetByTimeframe = (data: RowData[]) => {
 };
 
 const TimeframeBarChart: React.FC<{data: RowData[]}> = ({ data }) => {
+    // state for plotly for dynamic import
+    const [Plotly, setPlotly] = useState<any>(null);
+
+    // useEffect to only load plotly when needed
+    useEffect(() => {
+        const loadPlotly = async () => {
+          const PlotlyModule = await import('plotly.js-basic-dist');
+          setPlotly(PlotlyModule); // Store the loaded Plotly module
+        };
+    
+        loadPlotly();
+    }, []);
+
     // Get the calculations
     const { shortTermMet, midTermMet, longtermMet, shortTermUnmet, midTermUnmet, longTermUnmet } = findMetByTimeframe(data);
 
+    // If Plotly is not loaded yet, show a loading message
+    if (!Plotly) {
+        return <div>Loading chart...</div>; // You can replace this with a spinner or other loading indicator
+    }
     return (
         <Plot
             data={[
