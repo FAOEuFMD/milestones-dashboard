@@ -8,7 +8,7 @@ const baseQuery =
   focus_objectives.name AS focus_objective_name,
   key_areas.id AS key_area_id,
   key_areas.name AS key_area_name,
-  targets.target_id,
+  targets.id,
   targets.indicator,
   targets.target_description,
   targets.result_to_date,
@@ -41,25 +41,4 @@ const filterByFocusAndKey = async (focus_objective_id, key_area_id) => {
     return rows;
 }
 
-// Function to get target data filtered by key_area_id
-const getTargetsByKeyArea = async (keyAreaId) => {
-    const query = baseQuery + " WHERE key_areas.id = ?";
-    const {rows} = await db.query(query, [keyAreaId]);
-    return rows;
-};
-
-// Function to get target data filtered by expected_result
-const getTargetsByExpectedResult = async (expectedResult) => {
-    const query = baseQuery + " WHERE targets.expected_result LIKE ?";
-    const {rows} = await db.query(query, [expectedResult]);
-    return rows;
-};
-
-// Function to get target data filtered by key_area_id and expected_result
-const getTargetsByKeyAreaAndExpectedResult = async (keyAreaId, expectedResult) => {
-    const query = baseQuery + " WHERE key_areas.id = ? AND targets.expected_result LIKE ?";
-    const {rows} = await db.query(query, [keyAreaId, expectedResult]);
-    return rows;
-};
-
-module.exports = { filterByFocusAndKey, filterByFocus, getAllTargetData, getTargetsByKeyArea, getTargetsByExpectedResult, getTargetsByKeyAreaAndExpectedResult };
+module.exports = { filterByFocusAndKey, filterByFocus, getAllTargetData };
