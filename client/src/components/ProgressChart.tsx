@@ -1,5 +1,4 @@
 import Plot from "react-plotly.js";
-import React, { useEffect, useState } from 'react';
 
 interface ProgressChartProps {
     result_to_date: number;
@@ -7,19 +6,6 @@ interface ProgressChartProps {
 }
 
 const ProgressChart: React.FC<ProgressChartProps> = ({ result_to_date, program_target }) => {
-    // state for plotly for dynamic import
-    const [Plotly, setPlotly] = useState<any>(null);
-
-    // useEffect to only load plotly when needed
-    useEffect(() => {
-        const loadPlotly = async () => {
-          const PlotlyModule = await import('plotly.js-basic-dist');
-          setPlotly(PlotlyModule); // Store the loaded Plotly module
-        };
-    
-        loadPlotly();
-    }, []);
-
     // compute remaining target; make sure it's not negative or bar looks odd
     const remainingTarget = Math.max(program_target - result_to_date, 0);
 
@@ -28,10 +14,6 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ result_to_date, program_t
     if (result_to_date >= program_target) progressColor = "#048B5D";
     else if (result_to_date > 0) progressColor = "#28949C"; 
 
-    // If Plotly is not loaded yet, show a loading message
-    if (!Plotly) {
-        return <div>Loading chart...</div>; // You can replace this with a spinner or other loading indicator
-    }
     return (
         <Plot
             data={[
