@@ -1,4 +1,4 @@
-from config import app
+from config import app, db
 from alembic import op
 
 def upgrade():
