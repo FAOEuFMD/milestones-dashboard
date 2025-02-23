@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www",
-    "migrate": "node model/database.js"
+    "start": "source venv/bin/activate && python3 backend/main.py",
+    "migrate": "flask --app migrations.py db upgrade"
   },
   "dependencies": {
     "@tanstack/react-table": "^8.20.6",

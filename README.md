@@ -8,11 +8,13 @@ An open-source dashboard that tracks the completion of yearly EuFMD Program Targ
 - React (^18.2.0)
 - React Router Dom (^6.22.3)
 - Tailwind CSS (^3.4.3)
-- Node.js (v20.13.0)
-- Express.js (~4.16.1)
+- Python3
 - MySql2 (3.12.0)
 
 ## Project setup
+
+#### Prerequisites
+In order to run the backend of this project, you will need to have Python3 and pip3 installed on your machine.
 
 #### .gitignore Settings
 
@@ -27,11 +29,13 @@ Please make sure to keep these files out of version control to avoid potential i
 
 ### Dependencies
 
-Run `npm install` in the project folder to install dependencies related to Express (the server). Check if the following dependencies are installed, otherwise install with the commands:
+Run `npm install` in the project folder to install server side dependencies. Check if the following dependencies are installed, otherwise install with the commands:
 
-- Express.js `npm install express`
+
 - Nodemon `npm install -g nodemon`
 - MySQL `npm install mysql`
+
+You will also need to create and activate a virtual environment. Run the commands `python -m venv venv` and `source venv/bin/activate` to activate your virtual environment. Then, run `pip install -r requirements.txt` in order to install the Python dependencies required to run the backend.
 
 Type `cd client` in the terminal and run `npm install` to install dependencies related to React TypeScript (the client). Check if the following is installed:
 
@@ -60,7 +64,8 @@ Ensure that the migration was successful by connecting to your newly created dat
 
 ### Development
 
-- Run `npm start` in the project directory to start the Express server on port 5000
+- Run `npm start` in the project directory
+  Alternatively, cd into the backend directory and use the command `python3 main.py`.
 - Type `cd client` in a new terminal and run `npm run dev` to start the client server in development mode with hot reloading in port 5173.
 
 ### Deployment

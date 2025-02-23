@@ -6,9 +6,6 @@ node_modules/
 # Environment variable files
 .env
 
-# database and backend configuration
-config.py
-
 # Build directories
 /dist
 /build
