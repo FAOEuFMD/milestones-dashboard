@@ -32,7 +32,7 @@ const Homepage: React.FC = () => {
   // Call API for Focus Objective data
   const getFocus = async () => {
     try {
-      const results = await fetch(`${API_URL}/api/targets/`, {
+      const results = await fetch(`${API_URL}/`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
       });

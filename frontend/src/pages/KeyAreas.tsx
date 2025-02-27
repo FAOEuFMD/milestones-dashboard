@@ -36,7 +36,7 @@ const KeyAreas: React.FC = () => {
   // Get data filtered by focus objective
   const fetchData = async (id: number) => {
     try {
-      const response = await axios.get(`${API_URL}/api/targets/focus_objective/${id}`);
+      const response = await axios.get(`${API_URL}/${id}`);
 
       // Group data by key area so we can map through them. Data will be an array with one object corresponding to each key area id: [ {keyAreaId: id, items: [rows for that key area]}, etc. ]
       const groupedData = groupByKeyArea(response.data);
