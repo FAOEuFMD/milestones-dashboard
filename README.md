@@ -5,19 +5,20 @@ The Milestones Dashboard is an open-source application designed to track the com
 ## Prerequisites
 
 - Node.js (v20.13.0)
+- Python 3.12.7
 - MySQL
 - npm
 
 ## Dependencies
 
-Server-side:
+Server-side (backend):
 
 - Python 3.12.7
 - Flask 3.1.0
 - Werkzeug 3.1.3
 - MySQL (^2.18.1)
 
-Client-side:
+Client-side (frontend):
 
 - TypeScript (^5.2.2)
 - React (^18.2.0)
@@ -49,7 +50,7 @@ npm install
 
 ### 4. Environment Configuration:
 
-- Copy `.env.example` to `.env`
+- In the root project directory, copy `.env.example` to `.env`
 - Configure database credentials and other environment variables
 
 ### 5. Configuration
@@ -78,14 +79,14 @@ Run `npm install` in the project folder to install server side dependencies.
 
 You will also need to create and activate a virtual environment. Run the commands `python -m venv venv` and `source venv/bin/activate` to activate your virtual environment. Then, run `pip install -r requirements.txt` in order to install the Python dependencies required to run the backend.
 
-Type `cd frontend` in the terminal and run `npm install` to install dependencies related to React TypeScript (the client). Check if the following is installed:
+Type `cd frontend` in the terminal and run `npm install` to install client-side dependencies related to React TypeScript (the client). Check if the following is installed:
 
 - React Router `npm install react-router-dom`
 - Tailwind CSS (follow this guide: https://tailwindcss.com/docs/guides/vite)
 
 ### Database Prep
 
-Create a `.env` file in the root directory of the project and fill in the necessary environment variables - ask the development team for the correct values. Use the `.env.example` file as a template:
+Create a `.env` file in the root directory of the project (see step #4) and fill in the necessary environment variables - ask the development team for the correct values. Use the `.env.example` file as a template:
 
 ```sh
   cp .env.example .env
