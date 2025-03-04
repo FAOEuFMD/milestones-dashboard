@@ -77,7 +77,7 @@ Please make sure to keep these files out of version control to avoid potential i
 
 Run `npm install` in the project folder to install server side dependencies.
 
-You will also need to create and activate a virtual environment. Run the commands `python -m venv venv` and `source venv/bin/activate` to activate your virtual environment. Then, run `pip install -r requirements.txt` in order to install the Python dependencies required to run the backend.
+You will also need to create and activate a virtual environment. Run the commands `python -m venv venv` and `source venv/bin/activate` (or `. venv/Scripts/activate` for Windows users) to activate your virtual environment. Then, run `pip install -r requirements.txt` in order to install the Python dependencies required to run the backend. You may need to install python-dotenv separately: `pip install python-dotenv`.
 
 Type `cd frontend` in the terminal and run `npm install` to install client-side dependencies related to React TypeScript (the client). Check if the following is installed:
 
