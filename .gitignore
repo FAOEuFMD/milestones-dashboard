@@ -9,6 +9,7 @@ node_modules/
 # Build directories
 /dist
 /build
+**/assets
 
 # Logs
 *.log
