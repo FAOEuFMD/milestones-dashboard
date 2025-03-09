@@ -9,6 +9,7 @@ node_modules/
 # Build directories
 /dist
 /build
+**/assets
 
 # Logs
 *.log
@@ -34,3 +35,9 @@ node_modules/
 # Ignore IDE configurations
 .vscode/
 .idea/
+
+# Python virtual environment
+venv/
+
+# PyCache files
+__pycache__

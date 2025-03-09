@@ -1,0 +1,25 @@
+# To install dependencies listed below:
+# Create a new virtual environment in the root directory
+# Command: python3 -m venv venv
+# Then activate the virtual environment
+# Command: source venv/bin/activate
+# Lastly, install the dependencies
+# Command: pip install -r requirements.txt
+
+alembic==1.14.1
+blinker==1.9.0
+click==8.1.8
+Flask==3.1.0
+Flask-Cors==5.0.0
+Flask-Migrate==4.1.0
+Flask-SQLAlchemy==3.1.1
+greenlet==3.1.1
+itsdangerous==2.2.0
+Jinja2==3.1.5
+Mako==1.3.9
+MarkupSafe==3.0.2
+PyMySQL==1.1.1
+python-dotenv==1.0.1
+SQLAlchemy==2.0.37
+typing_extensions==4.12.2
+Werkzeug==3.1.3
