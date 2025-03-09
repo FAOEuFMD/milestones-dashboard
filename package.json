@@ -2,10 +2,14 @@
   "name": "milestones-dashboard",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
+  "scripts":
     "dev": "nodemon ./bin/www",
     "start": "venv\\Scripts\\activate && python backend/main.py || (source venv/bin/activate && python3 backend/main.py)",
     "migrate": "flask --app migrations.py db upgrade"
+
+    "start": "nodemon ./bin/www",
+    "migrate": "node model/database.js"
+
   },
   "dependencies": {
     "@tanstack/react-table": "^8.20.6",
@@ -16,7 +20,7 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
-    "express": "~4.16.1",
+    "express": "~4.21.1",
     "morgan": "~1.9.1",
     "mysql2": "^3.12.0",
     "nodemon": "^3.1.0",

@@ -100,7 +100,9 @@ Create a `.env` file in the root directory of the project (see step #4) and fill
   CREATE database Targets;
 ```
 
+
 4. Exit the MySQL client and run `mysql -u root -p Targets < path/to/your/dump/file` in the terminal to migrate the exported dump file into your local database.
+
 
 5. Ensure that the migration was successful by connecting to your newly created database and checking that the tables contain the exported data.
 
