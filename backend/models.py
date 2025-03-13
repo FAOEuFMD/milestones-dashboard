@@ -9,15 +9,16 @@ engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
 
 class Targets(db.Model):
     __tablename__ = 'targets'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(50), primary_key=True)
     key_area_id = db.Column(db.Integer, db.ForeignKey('key_areas.id'), nullable=True)
     expected_result_id = db.Column(db.String(50), nullable=True)
     expected_result = db.Column(db.String(128), nullable=True)
-    target_id = db.Column(db.String(50), nullable=True)
+    # target_id = db.Column(db.String(50), nullable=True)
     indicator = db.Column(db.String(256), nullable=True)
     target_description = db.Column(db.String(1024), nullable=True)
     result_to_date = db.Column(db.Integer, nullable=True)
     program_target = db.Column(db.Integer, nullable=True)
+    priority = db.Column(db.String(100), nullable=True)
     target_timeframe = db.Column(db.String(50), nullable=True)
     timeframe_frequency = db.Column(db.String(50), nullable=True)
     key_area = relationship("KeyAreas", foreign_keys=[key_area_id]) # Add relationship to KeyAreas
@@ -28,7 +29,7 @@ class Targets(db.Model):
             "keyAreaId": self.key_area_id,
             "expectedResultId": self.expected_result_id,
             "expectedResult": self.expected_result,
-            "targetId": self.target_id,
+            "targetId": self.id,
             "indicator": self.indicator,
             "targetDescription": self.target_description,
             "resultToDate": self.result_to_date,

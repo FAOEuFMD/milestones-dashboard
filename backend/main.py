@@ -19,7 +19,7 @@ base_query = select(
     FocusObjectives.name.label("focus_objective_name"),
     KeyAreasAlias.id.label("key_area_id"),
     KeyAreasAlias.name.label("key_area_name"),
-    TargetsAlias.target_id.label("target_id"),
+    TargetsAlias.id.label("target_id"),
     TargetsAlias.indicator.label("indicator"),
     TargetsAlias.target_description.label("target_description"),
     TargetsAlias.result_to_date.label("result_to_date"),
