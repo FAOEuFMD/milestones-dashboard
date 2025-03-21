@@ -6,6 +6,7 @@ from models import FocusObjectives, KeyAreas, Targets
 from flask import jsonify
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import aliased
+from flask import send_from_directory
 
 # Create the database engine using the imported URI
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
@@ -88,8 +89,20 @@ def get_data_by_key_area(focus_objective_id, key_area_id):
         return jsonify({'message': 'Database query failed'}), 500
 
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+   
+    if path.startswith('api/'):
+        pass
+    elif path != "" and os.path.exists(os.path.join('../frontend/dist', path)):
+        return send_from_directory('../frontend/dist', path)
+    else:
+        return send_from_directory('../frontend/dist', 'index.html')    
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
