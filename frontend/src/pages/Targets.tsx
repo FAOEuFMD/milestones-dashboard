@@ -31,7 +31,8 @@ const Targets: React.FC = () => {
   // Get data filtered by focus objective and key area
   const fetchTargetsData = async (focusId: number, keyId: number) => {
     try {
-      const response = await axios.get(`${API_URL}/${focusId}/${keyId}`);
+      //const response = await axios.get(`${API_URL}/${focusId}/${keyId}`);
+      const response = await axios.get(`${API_URL}/focus/${focusId}/key/${keyId}`);
       setTargetsData(response.data);
     } catch (error) {
       console.error('Error fetching data: ', error);
