@@ -44,7 +44,7 @@ colnames = [
 
 
 # route for fetching all data
-@app.route("/", methods=["GET"] )
+@app.route("/api/data", methods=["GET"] )
 def get_all_data():
     try:
         result = db.session.execute(base_query).fetchall()
@@ -55,7 +55,7 @@ def get_all_data():
 
 
 # route for fetching data by focus objective id
-@app.route('/<int:focus_objective_id>', methods=["GET"])
+@app.route('/api/focus/<int:focus_objective_id>', methods=["GET"])
 def get_data_by_focus_objective(focus_objective_id):
 
     try:
@@ -72,7 +72,7 @@ def get_data_by_focus_objective(focus_objective_id):
 
 
 # route for fetching data by focus objective AND key area
-@app.route('/<int:focus_objective_id>/<int:key_area_id>', methods=["GET"])
+@app.route('/api/focus/<int:focus_objective_id>/<int:key_area_id>', methods=["GET"])
 def get_data_by_key_area(focus_objective_id, key_area_id):
 
     try:
@@ -95,11 +95,10 @@ def serve(path):
    
     if path.startswith('api/'):
         pass
-    elif path != "" and os.path.exists(os.path.join('../frontend/dist', path)):
-        return send_from_directory('../frontend/dist', path)
+    elif path != "" and os.path.exists(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'frontend/dist', path)):
+        return send_from_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'frontend/dist'), path)
     else:
-        return send_from_directory('../frontend/dist', 'index.html')    
-
+        return send_from_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'frontend/dist'), 'index.html')    
 
 if __name__ == "__main__":
     with app.app_context():
