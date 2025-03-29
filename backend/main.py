@@ -72,7 +72,7 @@ def get_data_by_focus_objective(focus_objective_id):
 
 
 # route for fetching data by focus objective AND key area
-@app.route('/api/focus/<int:focus_objective_id>/<int:key_area_id>', methods=["GET"])
+@app.route('/api/focus/<int:focus_objective_id>/key/<int:key_area_id>', methods=["GET"])
 def get_data_by_key_area(focus_objective_id, key_area_id):
 
     try:
