@@ -34,6 +34,7 @@ class Targets(db.Model):
             "targetDescription": self.target_description,
             "resultToDate": self.result_to_date,
             "programTarget": self.program_target,
+            "priority": self.priority,
             "targetTimeframe": self.target_timeframe,
             "timeframeFrequency": self.timeframe_frequency,
         }
