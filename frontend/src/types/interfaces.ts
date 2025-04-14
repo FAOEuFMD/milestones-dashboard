@@ -7,6 +7,7 @@
     key_area_id: number;
     key_area_name: string;
     program_target: number;
+    priority: string;
     result_to_date: number;
     target_description: string;
     target_id: string;

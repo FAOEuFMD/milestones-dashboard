@@ -19,9 +19,9 @@ type TargetsRouteParams = {
 const Targets: React.FC = () => {
   
   const [targetsData, setTargetsData] = useState<RowData[]>([]);
-  // State for timeframe filters
-  const [timeframeFilters, setTimeframeFilters] = useState<string[]>([]);
+  // State for priority and status filters
   const [statusFilters, setStatusFilters] = useState<string[]>([]);
+  const [priorityFilters, setPriorityFilters] = useState<string[]>([]);
 
   // Get focus objective and key area id from params
   const { focusObjectiveId, keyAreaId } = useParams<TargetsRouteParams>();
@@ -45,12 +45,12 @@ const Targets: React.FC = () => {
   }, []);
 
   // Filters can easily be added to if we think of more
-  const handleFilterChange = (filterType: "timeframe" | "status", value: string) => {
+  const handleFilterChange = (filterType: "status" | "priority", value: string) => {
     console.log("handleFilterChange called with:");
   console.log("filterType:", filterType);  // Logs 'timeframe' or 'status'
   console.log("value:", value);            // Logs the selected value (goalType or category)
-    if (filterType === 'timeframe') {
-      setTimeframeFilters((prevState) =>
+    if (filterType === 'priority') {
+      setPriorityFilters((prevState) =>
       prevState.includes(value)
         ? prevState.filter((item) => item !== value) // uncheck category if already checked
         : [...prevState, value] // add category if not previously checked
@@ -65,18 +65,21 @@ const Targets: React.FC = () => {
   }
 
   // apply filters based on checked boxes, else send all the data
-  const filteredData = timeframeFilters.length || statusFilters.length 
+  const filteredData = statusFilters.length || priorityFilters.length
     ? targetsData.filter((target) => {
       const status = calculateStatus(target.result_to_date, target.program_target);
-      const matchesGoalLength = timeframeFilters.length ? timeframeFilters.includes(target.target_timeframe) : true;
+      const targetPriority = typeof target.priority === 'string' 
+        ? target.priority.toLowerCase() === 'yes' ? "Yes" : "No"
+        : Boolean(target.priority) ? "Yes" : "No";
+      const matchesPriority = priorityFilters.length ? priorityFilters.includes(targetPriority) : true;
       const matchesStatus = statusFilters.length ? statusFilters.includes(status) : true;
-      return matchesGoalLength && matchesStatus;
+      return matchesStatus && matchesPriority;
     })
     : targetsData;
 
-  // Create filter categories for goal length
-  const goalLength = ["Short-term goal", "Mid-term goal", "Long-term goal"];
+  // Create filter categories
   const goalStatus = ["Met", "In progress", "Not started"];
+  const priorityOptions = ["Yes", "No"];
 
   return (
     <div>
@@ -114,13 +117,13 @@ const Targets: React.FC = () => {
                       handleFilterChange={(filter, value) => handleFilterChange(filter, value)}/>
               </div>
 
-              {/* Timeframe Filter */}
+              {/* Priority Filter */}
               <div>
-                  <h3 className="p-3 text-left text-lg font-bold">Goal Length</h3>
+                  <h3 className="p-3 text-left text-lg font-bold">Priority</h3>
                     <Filters
-                      categories={goalLength} 
-                      selectedCategories={timeframeFilters} 
-                      filter='timeframe'
+                      categories={priorityOptions} 
+                      selectedCategories={priorityFilters} 
+                      filter='priority'
                       handleFilterChange={(filter, value) => handleFilterChange(filter, value)}/>
               </div>
             </div>

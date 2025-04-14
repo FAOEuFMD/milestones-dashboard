@@ -25,6 +25,7 @@ base_query = select(
     TargetsAlias.target_description.label("target_description"),
     TargetsAlias.result_to_date.label("result_to_date"),
     TargetsAlias.program_target.label("program_target"),
+    TargetsAlias.priority.label("priority"),
     TargetsAlias.expected_result.label("expected_result"),
     TargetsAlias.target_timeframe.label("target_timeframe"),
 ).select_from(FocusObjectives).join(
@@ -38,7 +39,7 @@ base_query = select(
 colnames = [
     "focus_objective_id", "focus_objective_name", "key_area_id", "key_area_name",
     "target_id", "indicator", "target_description", "result_to_date",
-    "program_target", "expected_result", "target_timeframe"
+    "program_target", "priority", "expected_result", "target_timeframe"
 ]
 
 

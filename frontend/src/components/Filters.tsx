@@ -1,8 +1,8 @@
 interface FiltersProps{
     categories: string[];
     selectedCategories: string[];
-    filter: 'timeframe' | 'status';
-    handleFilterChange: (filter: 'timeframe' | 'status', value: string) => void
+    filter: 'status' | 'priority';
+    handleFilterChange: (filter: 'status' | 'priority', value: string) => void
 }
 
 const Filters: React.FC<FiltersProps> = ({ categories, selectedCategories, filter, handleFilterChange }) => {
